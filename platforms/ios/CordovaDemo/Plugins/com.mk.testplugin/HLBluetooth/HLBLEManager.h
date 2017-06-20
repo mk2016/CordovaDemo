@@ -43,7 +43,7 @@
 /** 获取蓝牙外设信号强度的回调  */
 @property (copy, nonatomic) HLGetRSSIBlock                          getRSSIBlock;
 
-@property (strong, nonatomic, readonly)   CBPeripheral            *connectedPerpheral;  /**< 当前连接的外设 */
+@property (strong, nonatomic, readonly) CBPeripheral                *connectedPerpheral;  /**< 当前连接的外设 */
 
 /**
  * 每次发送的最大数据长度，因为部分型号的蓝牙打印机一次写入数据过长，会导致打印乱码。
@@ -63,6 +63,7 @@
  *  @param option        其他可选参数
  */
 - (void)scanForPeripheralsWithServiceUUIDs:(NSArray<CBUUID *> *)uuids options:(NSDictionary<NSString *, id> *)options;
+
 /**
  *  开始搜索蓝牙外设，每次在block中返回一个蓝牙外设信息
  *  返回的block参数可参考CBCentralManager 的 centralManager:didDiscoverPeripheral:advertisementData:RSSI:

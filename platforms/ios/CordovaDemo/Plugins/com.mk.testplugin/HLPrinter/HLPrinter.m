@@ -21,8 +21,7 @@
 
 @implementation HLPrinter
 
-- (instancetype)init
-{
+- (instancetype)init{
     self = [super init];
     if (self) {
         [self defaultSetting];
@@ -30,8 +29,7 @@
     return self;
 }
 
-- (void)defaultSetting
-{
+- (void)defaultSetting{
     _printerData = [[NSMutableData alloc] init];
     
     // 1.初始化打印机
@@ -51,8 +49,7 @@
 /**
  *  换行
  */
-- (void)appendNewLine
-{
+- (void)appendNewLine{
     Byte nextRowBytes[] = {0x0A};
     [_printerData appendBytes:nextRowBytes length:sizeof(nextRowBytes)];
 }
@@ -60,8 +57,7 @@
 /**
  *  回车
  */
-- (void)appendReturn
-{
+- (void)appendReturn{
     Byte returnBytes[] = {0x0D};
     [_printerData appendBytes:returnBytes length:sizeof(returnBytes)];
 }
@@ -71,8 +67,7 @@
  *
  *  @param alignment 对齐方式：居左、居中、居右
  */
-- (void)setAlignment:(HLTextAlignment)alignment
-{
+- (void)setAlignment:(HLTextAlignment)alignment{
     Byte alignBytes[] = {0x1B,0x61,alignment};
     [_printerData appendBytes:alignBytes length:sizeof(alignBytes)];
 }
@@ -82,8 +77,7 @@
  *
  *  @param fontSize 字号
  */
-- (void)setFontSize:(HLFontSize)fontSize
-{
+- (void)setFontSize:(HLFontSize)fontSize{
     Byte fontSizeBytes[] = {0x1D,0x21,fontSize};
     [_printerData appendBytes:fontSizeBytes length:sizeof(fontSizeBytes)];
 }
@@ -93,8 +87,7 @@
  *
  *  @param text 文字内容
  */
-- (void)setText:(NSString *)text
-{
+- (void)setText:(NSString *)text{
     NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     NSData *data = [text dataUsingEncoding:enc];
     [_printerData appendData:data];
@@ -106,8 +99,7 @@
  *  @param text    文字内容
  *  @param maxChar 最多可以允许多少个字节,后面加...
  */
-- (void)setText:(NSString *)text maxChar:(int)maxChar
-{
+- (void)setText:(NSString *)text maxChar:(int)maxChar{
     NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     NSData *data = [text dataUsingEncoding:enc];
     if (data.length > maxChar) {
@@ -127,8 +119,7 @@
  *
  *  @param text 文字
  */
-- (void)setOffsetText:(NSString *)text
-{
+- (void)setOffsetText:(NSString *)text{
     // 1.计算偏移量,因字体和字号不同，所以计算出来的宽度与实际宽度有误差(小字体与22字体计算值接近)
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:22.0]};
     NSAttributedString *valueAttr = [[NSAttributedString alloc] initWithString:text attributes:dict];
@@ -146,8 +137,7 @@
  *
  *  @param offset 偏移量
  */
-- (void)setOffset:(NSInteger)offset
-{
+- (void)setOffset:(NSInteger)offset{
     NSInteger remainder = offset % 256;
     NSInteger consult = offset / 256;
     Byte spaceBytes2[] = {0x1B, 0x24, remainder, consult};
@@ -159,8 +149,7 @@
  *
  *  @param points 多少个点
  */
-- (void)setLineSpace:(NSInteger)points
-{
+- (void)setLineSpace:(NSInteger)points{
     //最后一位，可选 0~255
     Byte lineSpace[] = {0x1B,0x33,points};
     [_printerData appendBytes:lineSpace length:sizeof(lineSpace)];
@@ -171,8 +160,7 @@
  *
  *  @param size  1<= size <= 16,二维码的宽高相等
  */
-- (void)setQRCodeSize:(NSInteger)size
-{
+- (void)setQRCodeSize:(NSInteger)size{
     Byte QRSize [] = {0x1D,0x28,0x6B,0x03,0x00,0x31,0x43,size};
 //    Byte QRSize [] = {29,40,107,3,0,49,67,size};
     [_printerData appendBytes:QRSize length:sizeof(QRSize)];
@@ -183,8 +171,7 @@
  *
  *  @param level 48 <= level <= 51
  */
-- (void)setQRCodeErrorCorrection:(NSInteger)level
-{
+- (void)setQRCodeErrorCorrection:(NSInteger)level{
     Byte levelBytes [] = {0x1D,0x28,0x6B,0x03,0x00,0x31,0x45,level};
 //    Byte levelBytes [] = {29,40,107,3,0,49,69,level};
     [_printerData appendBytes:levelBytes length:sizeof(levelBytes)];
@@ -200,8 +187,7 @@
  *
  *  @param info 二维码数据
  */
-- (void)setQRCodeInfo:(NSString *)info
-{
+- (void)setQRCodeInfo:(NSString *)info{
     NSInteger kLength = info.length + 3;
     NSInteger pL = kLength % 256;
     NSInteger pH = kLength / 256;
@@ -217,8 +203,7 @@
 /**
  *  打印之前存储的二维码信息
  */
-- (void)printStoredQRData
-{
+- (void)printStoredQRData{
     Byte printBytes [] = {0x1D,0x28,0x6B,0x03,0x00,0x31,0x51,48};
 //    Byte printBytes [] = {29,40,107,3,0,49,81,48};
     [_printerData appendBytes:printBytes length:sizeof(printBytes)];
@@ -226,13 +211,11 @@
 
 #pragma mark - ------------function method ----------------
 #pragma mark  文字
-- (void)appendText:(NSString *)text alignment:(HLTextAlignment)alignment
-{
+- (void)appendText:(NSString *)text alignment:(HLTextAlignment)alignment{
     [self appendText:text alignment:alignment fontSize:HLFontSizeTitleSmalle];
 }
 
-- (void)appendText:(NSString *)text alignment:(HLTextAlignment)alignment fontSize:(HLFontSize)fontSize
-{
+- (void)appendText:(NSString *)text alignment:(HLTextAlignment)alignment fontSize:(HLFontSize)fontSize{
     // 1.文字对齐方式
     [self setAlignment:alignment];
     // 2.设置字号
@@ -246,13 +229,11 @@
     }
 }
 
-- (void)appendTitle:(NSString *)title value:(NSString *)value
-{
+- (void)appendTitle:(NSString *)title value:(NSString *)value{
     [self appendTitle:title value:value fontSize:HLFontSizeTitleSmalle];
 }
 
-- (void)appendTitle:(NSString *)title value:(NSString *)value fontSize:(HLFontSize)fontSize
-{
+- (void)appendTitle:(NSString *)title value:(NSString *)value fontSize:(HLFontSize)fontSize{
     // 1.设置对齐方式
     [self setAlignment:HLTextAlignmentLeft];
     // 2.设置字号
@@ -269,13 +250,11 @@
 
 }
 
-- (void)appendTitle:(NSString *)title value:(NSString *)value valueOffset:(NSInteger)offset
-{
+- (void)appendTitle:(NSString *)title value:(NSString *)value valueOffset:(NSInteger)offset{
     [self appendTitle:title value:value valueOffset:offset fontSize:HLFontSizeTitleSmalle];
 }
 
-- (void)appendTitle:(NSString *)title value:(NSString *)value valueOffset:(NSInteger)offset fontSize:(HLFontSize)fontSize
-{
+- (void)appendTitle:(NSString *)title value:(NSString *)value valueOffset:(NSInteger)offset fontSize:(HLFontSize)fontSize{
     // 1.设置对齐方式
     [self setAlignment:HLTextAlignmentLeft];
     // 2.设置字号
@@ -293,8 +272,7 @@
     }
 }
 
-- (void)appendLeftText:(NSString *)left middleText:(NSString *)middle rightText:(NSString *)right isTitle:(BOOL)isTitle
-{
+- (void)appendLeftText:(NSString *)left middleText:(NSString *)middle rightText:(NSString *)right isTitle:(BOOL)isTitle{
     [self setAlignment:HLTextAlignmentLeft];
     [self setFontSize:HLFontSizeTitleSmalle];
     NSInteger offset = 0;
@@ -321,8 +299,7 @@
 }
 
 #pragma mark 图片
-- (void)appendImage:(UIImage *)image alignment:(HLTextAlignment)alignment maxWidth:(CGFloat)maxWidth
-{
+- (void)appendImage:(UIImage *)image alignment:(HLTextAlignment)alignment maxWidth:(CGFloat)maxWidth{
     if (!image) {
         return;
     }
@@ -345,24 +322,20 @@
     
 }
 
-- (void)appendBarCodeWithInfo:(NSString *)info
-{
+- (void)appendBarCodeWithInfo:(NSString *)info{
     [self appendBarCodeWithInfo:info alignment:HLTextAlignmentCenter maxWidth:300];
 }
 
-- (void)appendBarCodeWithInfo:(NSString *)info alignment:(HLTextAlignment)alignment maxWidth:(CGFloat)maxWidth
-{
+- (void)appendBarCodeWithInfo:(NSString *)info alignment:(HLTextAlignment)alignment maxWidth:(CGFloat)maxWidth{
     UIImage *barImage = [UIImage barCodeImageWithInfo:info];
     [self appendImage:barImage alignment:alignment maxWidth:maxWidth];
 }
 
-- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size
-{
+- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size{
     [self appendQRCodeWithInfo:info size:size alignment:HLTextAlignmentCenter];
 }
 
-- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size alignment:(HLTextAlignment)alignment
-{
+- (void)appendQRCodeWithInfo:(NSString *)info size:(NSInteger)size alignment:(HLTextAlignment)alignment{
     [self setAlignment:alignment];
     [self setQRCodeSize:size];
     [self setQRCodeErrorCorrection:48];
@@ -371,13 +344,11 @@
     [self appendNewLine];
 }
 
-- (void)appendQRCodeWithInfo:(NSString *)info
-{
+- (void)appendQRCodeWithInfo:(NSString *)info{
     [self appendQRCodeWithInfo:info centerImage:nil alignment:HLTextAlignmentCenter maxWidth:250];
 }
 
-- (void)appendQRCodeWithInfo:(NSString *)info centerImage:(UIImage *)centerImage alignment:(HLTextAlignment)alignment maxWidth:(CGFloat )maxWidth
-{
+- (void)appendQRCodeWithInfo:(NSString *)info centerImage:(UIImage *)centerImage alignment:(HLTextAlignment)alignment maxWidth:(CGFloat )maxWidth{
     UIImage *QRImage = [UIImage qrCodeImageWithInfo:info centerImage:centerImage width:maxWidth];
     [self appendImage:QRImage alignment:alignment maxWidth:maxWidth];
 }
@@ -387,8 +358,7 @@
  
  @param data 自定义的data
  */
-- (void)appendCustomData:(NSData *)data
-{
+- (void)appendCustomData:(NSData *)data{
     if (data.length <= 0) {
         return;
     }
@@ -396,8 +366,7 @@
 }
 
 #pragma mark 其他
-- (void)appendSeperatorLine
-{
+- (void)appendSeperatorLine{
     // 1.设置分割线居中
     [self setAlignment:HLTextAlignmentCenter];
     // 2.设置字号
@@ -411,8 +380,7 @@
     [self appendNewLine];
 }
 
-- (void)appendFooter:(NSString *)footerInfo
-{
+- (void)appendFooter:(NSString *)footerInfo{
     [self appendSeperatorLine];
     if (!footerInfo) {
         footerInfo = @"谢谢惠顾，欢迎下次光临！";
@@ -420,8 +388,7 @@
     [self appendText:footerInfo alignment:HLTextAlignmentCenter];
 }
 
-- (NSData *)getFinalData
-{
+- (NSData *)getFinalData{
     return _printerData;
 }
 

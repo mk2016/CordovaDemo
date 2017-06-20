@@ -13,7 +13,7 @@ typedef NS_ENUM(NSInteger, HLOptionStage) {
     HLOptionStageConnection,            //蓝牙连接阶段
     HLOptionStageSeekServices,          //搜索服务阶段
     HLOptionStageSeekCharacteristics,   //搜索特性阶段
-    HLOptionStageSeekdescriptors,        //搜索描述信息阶段
+    HLOptionStageSeekdescriptors,       //搜索描述信息阶段
 };
 
 #pragma mark ------------------- 通知的定义 --------------------------
