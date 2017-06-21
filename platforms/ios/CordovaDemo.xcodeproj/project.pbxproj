@@ -77,6 +77,7 @@
 		C54D146C1EF91ABE004E6310 /* MKBluetoothPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKBluetoothPrinter.h; sourceTree = "<group>"; };
 		C54D146D1EF91ABE004E6310 /* MKBluetoothPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKBluetoothPrinter.m; sourceTree = "<group>"; };
 		C54D14731EF91CC3004E6310 /* MKConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKConst.h; sourceTree = "<group>"; };
+		C54D147A1EFAB524004E6310 /* CordovaDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CordovaDemo.entitlements; path = CordovaDemo/CordovaDemo.entitlements; sourceTree = "<group>"; };
 		C5DF32E61EF7B7C10093BF29 /* BluetoothPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothPrinter.h; sourceTree = "<group>"; };
 		C5DF32E71EF7B7C10093BF29 /* BluetoothPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothPrinter.m; sourceTree = "<group>"; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
@@ -122,6 +123,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				C54D147A1EFAB524004E6310 /* CordovaDemo.entitlements */,
 				EB87FDF41871DAF40020F90C /* config.xml */,
 				EB87FDF31871DA8E0020F90C /* www */,
 				EB87FDF11871DA420020F90C /* Staging */,
@@ -281,6 +283,11 @@
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = SU5VNK39CL;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};

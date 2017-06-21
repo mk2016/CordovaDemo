@@ -58,9 +58,10 @@
                     BOOL isExist = NO;
                     for (int i = 0; i < weakSelf.peripheralsArray.count; i++) {
                         CBPeripheral *per = weakSelf.peripheralsArray[i];
+                        ELog(@"UUIDString %zd :%@",i, per.identifier.UUIDString);
                         if ([per.identifier.UUIDString isEqualToString:peripheral.identifier.UUIDString]) {
                             isExist = YES;
-                            [weakSelf.peripheralsArray replaceObjectAtIndex:i withObject:per];
+                            [weakSelf.peripheralsArray replaceObjectAtIndex:i withObject:peripheral];
                             break;
                         }
                     }
@@ -123,7 +124,9 @@
     }
     
     if (peripheralId) {
+        ELog(@"peripheralId:%@",peripheralId);
         for (CBPeripheral *per in self.peripheralsArray) {
+            ELog(@"UUIDString:%@",per.identifier.UUIDString);
             if ([per.identifier.UUIDString isEqualToString:peripheralId]) {
                 self.connectPeripheral = per;
             }
@@ -219,40 +222,44 @@
 
 #pragma mark - ***** printer method *****
 - (void)appentData:(CDVInvokedUrlCommand *)command{
-    if (command.arguments.count > 0) {
-        if (command.arguments[0] && [command.arguments[0] isKindOfClass:[NSNumber class]]){
-            NSNumber *infoType = command.arguments[0];
-            switch (infoType.integerValue) {
-                case MKBTPrinterInfoType_text:
-                    [self appendText:command];
-                    break;
-                case MKBTPrinterInfoType_rank2:
-                    [self appendRank2:command];
-                    break;
-                case MKBTPrinterInfoType_rank3:
-                    [self appendRank3:command];
-                    break;
-                case MKBTPrinterInfoType_barCode:
-                    [self appendBarCode:command];
-                    break;
-                case MKBTPrinterInfoType_qrCode:
-                    [self appendQRCode:command];
-                    break;
-                case MKBTPrinterInfoType_image:
-                    
-                    break;
-                case MKBTPrinterInfoType_seperatorLine:
-                    [self appendSeperatorLine];
-                    break;
-                case MKBTPrinterInfoType_footer:
-                    [self appendFooter:command];
-                    
-                    break;
-                default:
-                    break;
+    [self.commandDelegate runInBackground:^{
+        if (command.arguments.count > 0) {
+            if (command.arguments[0] && [command.arguments[0] isKindOfClass:[NSNumber class]]){
+                NSNumber *infoType = command.arguments[0];
+                ELog(@"infoType:%@",infoType);
+                switch (infoType.integerValue) {
+                    case MKBTPrinterInfoType_text:
+                        [self appendText:command];
+                        break;
+                    case MKBTPrinterInfoType_rank2:
+                        [self appendRank2:command];
+                        break;
+                    case MKBTPrinterInfoType_rank3:
+                        [self appendRank3:command];
+                        break;
+                    case MKBTPrinterInfoType_barCode:
+                        [self appendBarCode:command];
+                        break;
+                    case MKBTPrinterInfoType_qrCode:
+                        [self appendQRCode:command];
+                        break;
+                    case MKBTPrinterInfoType_image:
+                        
+                        break;
+                    case MKBTPrinterInfoType_seperatorLine:
+                        [self appendSeperatorLine];
+                        break;
+                    case MKBTPrinterInfoType_footer:
+                        [self appendFooter:command];
+                        break;
+                    default:
+                        break;
+                }
             }
         }
-    }
+        [self callBackSuccess:NO callBackId:command.callbackId message:[NSString stringWithFormat:@"callBack:%@",command.arguments[0]]];
+
+    }];
 }
 
 - (void)finalPrinter:(CDVInvokedUrlCommand *)command{
@@ -313,6 +320,7 @@
             fontSize = HLFontSizeTitleBig;
         }
     }
+    ELog(@"====%@",command.arguments[0]);
     [self.printerInfo appendText:text alignment:alignment fontSize:fontSize];
 }
 
@@ -345,8 +353,10 @@
                         fontSize = HLFontSizeTitleBig;
                     }
                 }
+                ELog(@"====%@",command.arguments[0]);
                 [self.printerInfo appendTitle:title value:value valueOffset:offset fontSize:fontSize];
             }else{
+                ELog(@"====%@",command.arguments[0]);
                 [self.printerInfo appendTitle:title value:value];
             }
         }
@@ -379,6 +389,7 @@
             isTitle = [command.arguments[4] integerValue] == 1;
         }
     }
+    ELog(@"====%@",command.arguments[0]);
     [self.printerInfo appendLeftText:left middleText:middle rightText:right isTitle:isTitle];
 }
 
@@ -405,6 +416,7 @@
             maxWidth = [command.arguments[3] floatValue];
         }
     }
+    ELog(@"====%@",command.arguments[0]);
     [self.printerInfo appendBarCodeWithInfo:info alignment:alignment maxWidth:maxWidth];
 }
 
@@ -437,10 +449,12 @@
             alignment = HLTextAlignmentRight;
         }
     }
+    ELog(@"====%@",command.arguments[0]);
     [self.printerInfo appendQRCodeWithInfo:info size:size alignment:alignment];
 }
 
 - (void)appendSeperatorLine{
+    ELog(@"====6");
     [self.printerInfo appendSeperatorLine];
 }
 
@@ -451,6 +465,7 @@
             footerInfo = command.arguments[1];
         }
     }
+    ELog(@"====%@",command.arguments[0]);
     [self.printerInfo appendFooter:footerInfo];
 }
 
@@ -482,6 +497,11 @@
         }
     }
     ELog(@"%@",log);
+}
+
+- (void)stopPeripheralConnection:(CDVInvokedUrlCommand *)command{
+    [self.manager cancelPeripheralConnection];
+    [self callBackSuccess:YES callBackId:command.callbackId message:@"断开连接"];
 }
 
 
