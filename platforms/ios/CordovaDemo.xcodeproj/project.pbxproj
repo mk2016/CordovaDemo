@@ -14,12 +14,12 @@
 		302D95F114D2391D003F00A1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302D95EF14D2391D003F00A1 /* MainViewController.m */; };
 		302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 302D95F014D2391D003F00A1 /* MainViewController.xib */; };
 		6AFF5BF91D6E424B00AB3073 /* CDVLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */; };
-		C509D6F21EEBE38E006B254E /* MKTestPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C509D6F11EEBE38E006B254E /* MKTestPlugin.m */; };
 		C53CE0C61EEE5F51009407FB /* HLBLEManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C53CE0BE1EEE5F51009407FB /* HLBLEManager.m */; };
 		C53CE0C71EEE5F51009407FB /* HLPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = C53CE0C11EEE5F51009407FB /* HLPrinter.m */; };
 		C53CE0C81EEE5F51009407FB /* UIImage+Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = C53CE0C31EEE5F51009407FB /* UIImage+Bitmap.m */; };
 		C53CE0C91EEE5F51009407FB /* UIWebView+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C53CE0C51EEE5F51009407FB /* UIWebView+UIImage.m */; };
 		C53CE0CD1EEE60B9009407FB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53CE0CC1EEE60B9009407FB /* CoreBluetooth.framework */; };
+		C54D146E1EF91ABE004E6310 /* MKBluetoothPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = C54D146D1EF91ABE004E6310 /* MKBluetoothPrinter.m */; };
 		C5DF32E81EF7B7C10093BF29 /* BluetoothPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DF32E71EF7B7C10093BF29 /* BluetoothPrinter.m */; };
 /* End PBXBuildFile section */
 
@@ -64,8 +64,6 @@
 		32CA4F630368D1EE00C91783 /* CordovaDemo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CordovaDemo-Prefix.pch"; sourceTree = "<group>"; };
 		6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = CDVLaunchScreen.storyboard; path = CordovaDemo/CDVLaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* CordovaDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "CordovaDemo-Info.plist"; path = "CordovaDemo/CordovaDemo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = SOURCE_ROOT; };
-		C509D6F01EEBE38E006B254E /* MKTestPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKTestPlugin.h; sourceTree = "<group>"; };
-		C509D6F11EEBE38E006B254E /* MKTestPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKTestPlugin.m; sourceTree = "<group>"; };
 		C53CE0BC1EEE5F51009407FB /* HLBLEConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLBLEConst.h; sourceTree = "<group>"; };
 		C53CE0BD1EEE5F51009407FB /* HLBLEManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLBLEManager.h; sourceTree = "<group>"; };
 		C53CE0BE1EEE5F51009407FB /* HLBLEManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLBLEManager.m; sourceTree = "<group>"; };
@@ -76,6 +74,9 @@
 		C53CE0C41EEE5F51009407FB /* UIWebView+UIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+UIImage.h"; sourceTree = "<group>"; };
 		C53CE0C51EEE5F51009407FB /* UIWebView+UIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+UIImage.m"; sourceTree = "<group>"; };
 		C53CE0CC1EEE60B9009407FB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		C54D146C1EF91ABE004E6310 /* MKBluetoothPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKBluetoothPrinter.h; sourceTree = "<group>"; };
+		C54D146D1EF91ABE004E6310 /* MKBluetoothPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKBluetoothPrinter.m; sourceTree = "<group>"; };
+		C54D14731EF91CC3004E6310 /* MKConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKConst.h; sourceTree = "<group>"; };
 		C5DF32E61EF7B7C10093BF29 /* BluetoothPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothPrinter.h; sourceTree = "<group>"; };
 		C5DF32E71EF7B7C10093BF29 /* BluetoothPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothPrinter.m; sourceTree = "<group>"; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
@@ -200,8 +201,9 @@
 				C5DF32E51EF7B7C10093BF29 /* BP */,
 				C53CE0BB1EEE5F51009407FB /* HLBluetooth */,
 				C53CE0BF1EEE5F51009407FB /* HLPrinter */,
-				C509D6F01EEBE38E006B254E /* MKTestPlugin.h */,
-				C509D6F11EEBE38E006B254E /* MKTestPlugin.m */,
+				C54D146C1EF91ABE004E6310 /* MKBluetoothPrinter.h */,
+				C54D146D1EF91ABE004E6310 /* MKBluetoothPrinter.m */,
+				C54D14731EF91CC3004E6310 /* MKConst.h */,
 			);
 			path = com.mk.testplugin;
 			sourceTree = "<group>";
@@ -359,9 +361,9 @@
 			files = (
 				C53CE0C71EEE5F51009407FB /* HLPrinter.m in Sources */,
 				C53CE0C91EEE5F51009407FB /* UIWebView+UIImage.m in Sources */,
-				C509D6F21EEBE38E006B254E /* MKTestPlugin.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
+				C54D146E1EF91ABE004E6310 /* MKBluetoothPrinter.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				C53CE0C61EEE5F51009407FB /* HLBLEManager.m in Sources */,
 				C5DF32E81EF7B7C10093BF29 /* BluetoothPrinter.m in Sources */,

@@ -18,8 +18,7 @@
  *
  *  @return
  */
-- (UIImage *)imageForWebView
-{
+- (UIImage *)imageForWebView{
     // 1.获取WebView的宽高
     CGSize boundsSize = self.bounds.size;
     CGFloat boundsWidth = boundsSize.width;

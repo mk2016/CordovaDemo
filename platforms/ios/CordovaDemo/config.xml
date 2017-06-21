@@ -45,7 +45,7 @@
     <preference name="PageLength" value="0" />
     <preference name="PaginationBreakingMode" value="page" />
     <preference name="PaginationMode" value="unpaginated" />
-    <feature name="ocMKTestPlugin">
-        <param name="ios-package" value="MKTestPlugin" />
+    <feature name="MKBluetoothPrinter">
+        <param name="ios-package" value="MKBluetoothPrinter" />
     </feature>
 </widget>
