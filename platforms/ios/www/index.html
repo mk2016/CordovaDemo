@@ -41,20 +41,16 @@
             
             //开始扫描设备
             function scanForPeripherals() {
-                cordova.exec(testSuccess,failedCallBack,"MKBluetoothPrinter","scanForPeripherals",[]);
+                cordova.exec(getDeviceListSuccess,failedCallBack,"MKBluetoothPrinter","scanForPeripherals",[1]);
             }
-            function testSuccess(msg) {
-                var msgStr = JSON.stringify(msg)
-                printOCLog(msgStr);
-            }
-            
+
             //获取设备列表
             function getDeviceList(){
                 cordova.exec(getDeviceListSuccess,failedCallBack,"MKBluetoothPrinter","getPeripherals",[]);
             }
             function getDeviceListSuccess(msg){
                 var megStr = JSON.stringify(msg)
-                printOCLog(megStr);
+                printOCLog("getDevices:"+megStr);
             }
        
        
@@ -106,29 +102,7 @@
             }
             
             function appentText(){
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","resetPrinterInfo",[]);
-
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[0, MKBTPrinterInfoType.text,    "测试电商",               MKBTPAlignmentType.center,          MKBTPrinterFontType.big]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[1, MKBTPrinterInfoType.text,    "测试电商服务中心(销售单)", MKBTPAlignmentType.center]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[2, MKBTPrinterInfoType.barCode, "123456789012"]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[3, MKBTPrinterInfoType.seperatorLine]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[4, MKBTPrinterInfoType.titleValue,     "时间:", "2016-04-27 10:01:50", 150]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[5, MKBTPrinterInfoType.titleValue,     "订单:", "4000020160427100150", 150]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[6, MKBTPrinterInfoType.text,           "地址:深圳市南山区学府路东深大店阿里看到解放啦肯德基", MKBTPAlignmentType.left]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[7, MKBTPrinterInfoType.seperatorLine]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[8, MKBTPrinterInfoType.goodsTitle,     "商品","数量","单价"]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[9, MKBTPrinterInfoType.goods,          "铅笔","5","2.0"]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[10,MKBTPrinterInfoType.goods,          "橡皮","1","1.0"]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[11,MKBTPrinterInfoType.goods,          "笔记本","3","3.0"]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[12,MKBTPrinterInfoType.seperatorLine]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[13,MKBTPrinterInfoType.titleValue,     "总计:", "20"]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[14,MKBTPrinterInfoType.titleValue,     "实收:", "100.00"]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[15,MKBTPrinterInfoType.titleValue,     "找零:", "80.00"]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[16,MKBTPrinterInfoType.seperatorLine]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[17,MKBTPrinterInfoType.qrCode,         "www.baidu.com"]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[18,MKBTPrinterInfoType.seperatorLine]);
-//                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[MKBTPrinterInfoType.image,     "",300]);
-                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",[MKBTPrinterInfoType.footer,    "谢谢惠顾，欢迎下次光临！"]);
+                cordova.exec(printOCLogSuccess,failedCallBack,"MKBluetoothPrinter","appentData",["测试电商"]);
             }
             
             //打印log
@@ -152,7 +126,7 @@
         <br>
         <button style="font-size:17px;" onclick="finalPrinter();">打印信息</button>
         <br>
-        <button style="font-size:17px;" onclick="stopPeripheralConnection();">断开连接</button>
+        <button style="font-size:17px;" onclick="stopConnection();">断开连接</button>
     </body>
 <!--    <body>-->
 <!--        <div class="app">-->

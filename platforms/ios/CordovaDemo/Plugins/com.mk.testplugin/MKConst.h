@@ -20,13 +20,12 @@
 
 typedef NS_ENUM(NSInteger, MKBTPrinterInfoType) {
     MKBTPrinterInfoType_text            = 0,
-    MKBTPrinterInfoType_rank2           = 1,
-    MKBTPrinterInfoType_rank3           = 2,
-    MKBTPrinterInfoType_barCode         = 3,
-    MKBTPrinterInfoType_qrCode          = 4,
-    MKBTPrinterInfoType_image           = 5,
-    MKBTPrinterInfoType_seperatorLine   = 6,
-    MKBTPrinterInfoType_footer          = 7,
+    MKBTPrinterInfoType_textList        = 1,
+    MKBTPrinterInfoType_barCode         = 2,
+    MKBTPrinterInfoType_qrCode          = 3,
+    MKBTPrinterInfoType_image           = 4,
+    MKBTPrinterInfoType_seperatorLine   = 5,
+    MKBTPrinterInfoType_footer          = 6,
 };
 
 typedef NS_ENUM(NSInteger, MKBTPrinterFontType) {

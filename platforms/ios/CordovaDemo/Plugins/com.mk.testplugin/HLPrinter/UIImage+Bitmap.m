@@ -12,9 +12,38 @@
 
 @implementation UIImage (Bitmap)
 
+/** image base64 转换 */
+- (NSString *)mk_imageToBase64{
+    NSData *imageData = nil;
+    NSString *mimeType = nil;
+    if ([self hasAlpha]) {
+        imageData = UIImagePNGRepresentation(self);
+        mimeType = @"image/png";
+    } else {
+        imageData = UIImageJPEGRepresentation(self, 1.0f);
+        mimeType = @"image/jpeg";
+    }
+    return [NSString stringWithFormat:@"data:%@;base64,%@", mimeType, [imageData base64EncodedStringWithOptions: 0]];
+}
+
++ (UIImage *)mk_imageWithBase64:(NSString *)urlStr{
+    NSURL *url = [NSURL URLWithString:urlStr];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    UIImage *image = [UIImage imageWithData: data];
+    return image;
+}
+
+- (BOOL)hasAlpha{
+    CGImageAlphaInfo alpha = CGImageGetAlphaInfo(self.CGImage);
+    return (alpha == kCGImageAlphaFirst ||
+            alpha == kCGImageAlphaLast ||
+            alpha == kCGImageAlphaPremultipliedFirst ||
+            alpha == kCGImageAlphaPremultipliedLast);
+}
+
+
 //
-- (NSData *)bitmapData
-{
+- (NSData *)bitmapData{
     CGImageRef imageRef = self.CGImage;
     // Create a bitmap context to draw the uiimage into
     CGContextRef context = [self bitmapRGBA8Context];
@@ -34,9 +63,7 @@
     // Get a pointer to the data
     uint32_t *bitmapData = (uint32_t *)CGBitmapContextGetData(context);
     
-    
     if(bitmapData) {
-        
         uint8_t *m_imageData = (uint8_t *) malloc(width * height/8 + 8*height/8);
         memset(m_imageData, 0, width * height/8 + 8*height/8);
         int result_index = 0;
@@ -54,27 +81,22 @@
             m_imageData[result_index++] = width/256;
             for(int x = 0; x < width; x++) {
                 int value = 0;
-                for (int temp_y = 0 ; temp_y < 8; ++temp_y)
-                {
+                for (int temp_y = 0 ; temp_y < 8; ++temp_y){
                     uint8_t *rgbaPixel = (uint8_t *) &bitmapData[(y+temp_y) * width + x];
                     uint32_t gray = 0.3 * rgbaPixel[BPRed] + 0.59 * rgbaPixel[BPGreen] + 0.11 * rgbaPixel[BPBlue];
                     
-                    if (gray < 127)
-                    {
+                    if (gray < 127){
                         value += 1<<(7-temp_y)&255;
                     }
-                    
                 }
                 m_imageData[result_index++] = value;
                 
                 value = 0;
-                for (int temp_y = 8 ; temp_y < 16; ++temp_y)
-                {
+                for (int temp_y = 8 ; temp_y < 16; ++temp_y){
                     uint8_t *rgbaPixel = (uint8_t *) &bitmapData[(y+temp_y) * width + x];
                     uint32_t gray = 0.3 * rgbaPixel[BPRed] + 0.59 * rgbaPixel[BPGreen] + 0.11 * rgbaPixel[BPBlue];
                     
-                    if (gray < 127)
-                    {
+                    if (gray < 127){
                         value += 1<<(7-temp_y%8)&255;
                     }
                     
@@ -82,16 +104,13 @@
                 m_imageData[result_index++] = value;
                 
                 value = 0;
-                for (int temp_y = 16 ; temp_y < 24; ++temp_y)
-                {
+                for (int temp_y = 16 ; temp_y < 24; ++temp_y){
                     uint8_t *rgbaPixel = (uint8_t *) &bitmapData[(y+temp_y) * width + x];
                     uint32_t gray = 0.3 * rgbaPixel[BPRed] + 0.59 * rgbaPixel[BPGreen] + 0.11 * rgbaPixel[BPBlue];
                     
-                    if (gray < 127)
-                    {
+                    if (gray < 127){
                         value += 1<<(7-temp_y%8)&255;
                     }
-                    
                 }
                 m_imageData[result_index++] = value;
             }
@@ -113,8 +132,7 @@
     return nil ; 
 }
 
-- (CGContextRef)bitmapRGBA8Context
-{
+- (CGContextRef)bitmapRGBA8Context{
     CGImageRef imageRef = self.CGImage;
     if (!imageRef) {
         return NULL;
@@ -170,11 +188,9 @@
 
 }
 
-- (UIImage *)imageWithscaleMaxWidth:(CGFloat)maxWidth
-{
+- (UIImage *)imageWithscaleMaxWidth:(CGFloat)maxWidth{
     CGFloat width = self.size.width;
-    if (width > maxWidth)
-    {
+    if (width > maxWidth){
         CGFloat height = self.size.height;
         CGFloat maxHeight = maxWidth * height / width;
         
@@ -189,8 +205,7 @@
     return self;
 }
 
-- (UIImage *)blackAndWhiteImage
-{
+- (UIImage *)blackAndWhiteImage{
     //    CGSize size = self.size;
     CIImage *beginImage = [CIImage imageWithCGImage:self.CGImage];
     CIFilter *filter = [CIFilter filterWithName:@"CIColorMonochrome"
@@ -211,8 +226,7 @@
 
 @implementation UIImage (QRCode)
 
-+ (UIImage *)barCodeImageWithInfo:(NSString *)info
-{
++ (UIImage *)barCodeImageWithInfo:(NSString *)info{
     // 创建条形码
     CIFilter *filter = [CIFilter filterWithName:@"CICode128BarcodeGenerator"];
     
@@ -230,8 +244,7 @@
     return image;
 }
 
-+ (UIImage *)qrCodeImageWithInfo:(NSString *)info centerImage:(UIImage *)centerImage  width:(CGFloat)width
-{
++ (UIImage *)qrCodeImageWithInfo:(NSString *)info centerImage:(UIImage *)centerImage  width:(CGFloat)width{
     if (!info) {
         return nil;
     }
@@ -265,8 +278,7 @@
     return resultImage;
 }
 
-+ (UIImage *)createNonInterpolatedUIImageFormCIImage:(CIImage *)image withSize:(CGFloat)size
-{
++ (UIImage *)createNonInterpolatedUIImageFormCIImage:(CIImage *)image withSize:(CGFloat)size{
     CGRect extent = CGRectIntegral(image.extent);
     CGFloat scale = MIN(size/CGRectGetWidth(extent), size/CGRectGetHeight(extent));
     // 创建bitmap;

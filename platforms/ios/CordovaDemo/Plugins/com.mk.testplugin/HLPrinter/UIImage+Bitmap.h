@@ -48,6 +48,10 @@ typedef NS_ENUM(NSInteger,BitPixels) {
  */
 - (UIImage *)blackAndWhiteImage;
 
+/** image base64 转换 */
+- (NSString *)mk_imageToBase64;
++ (UIImage *)mk_imageWithBase64:(NSString *)string;
+
 @end
 
 #pragma mark - -----------制作二维码 条形码------------

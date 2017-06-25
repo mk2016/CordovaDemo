@@ -20,6 +20,7 @@
 		C53CE0C91EEE5F51009407FB /* UIWebView+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C53CE0C51EEE5F51009407FB /* UIWebView+UIImage.m */; };
 		C53CE0CD1EEE60B9009407FB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53CE0CC1EEE60B9009407FB /* CoreBluetooth.framework */; };
 		C54D146E1EF91ABE004E6310 /* MKBluetoothPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = C54D146D1EF91ABE004E6310 /* MKBluetoothPrinter.m */; };
+		C54D147D1EFAE190004E6310 /* MKPrinterInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C54D147C1EFAE190004E6310 /* MKPrinterInfoModel.m */; };
 		C5DF32E81EF7B7C10093BF29 /* BluetoothPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DF32E71EF7B7C10093BF29 /* BluetoothPrinter.m */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,8 @@
 		C54D146D1EF91ABE004E6310 /* MKBluetoothPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKBluetoothPrinter.m; sourceTree = "<group>"; };
 		C54D14731EF91CC3004E6310 /* MKConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKConst.h; sourceTree = "<group>"; };
 		C54D147A1EFAB524004E6310 /* CordovaDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CordovaDemo.entitlements; path = CordovaDemo/CordovaDemo.entitlements; sourceTree = "<group>"; };
+		C54D147B1EFAE190004E6310 /* MKPrinterInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKPrinterInfoModel.h; sourceTree = "<group>"; };
+		C54D147C1EFAE190004E6310 /* MKPrinterInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKPrinterInfoModel.m; sourceTree = "<group>"; };
 		C5DF32E61EF7B7C10093BF29 /* BluetoothPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothPrinter.h; sourceTree = "<group>"; };
 		C5DF32E71EF7B7C10093BF29 /* BluetoothPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothPrinter.m; sourceTree = "<group>"; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
@@ -229,6 +232,8 @@
 				C53CE0C31EEE5F51009407FB /* UIImage+Bitmap.m */,
 				C53CE0C41EEE5F51009407FB /* UIWebView+UIImage.h */,
 				C53CE0C51EEE5F51009407FB /* UIWebView+UIImage.m */,
+				C54D147B1EFAE190004E6310 /* MKPrinterInfoModel.h */,
+				C54D147C1EFAE190004E6310 /* MKPrinterInfoModel.m */,
 			);
 			path = HLPrinter;
 			sourceTree = "<group>";
@@ -368,6 +373,7 @@
 			files = (
 				C53CE0C71EEE5F51009407FB /* HLPrinter.m in Sources */,
 				C53CE0C91EEE5F51009407FB /* UIWebView+UIImage.m in Sources */,
+				C54D147D1EFAE190004E6310 /* MKPrinterInfoModel.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				C54D146E1EF91ABE004E6310 /* MKBluetoothPrinter.m in Sources */,

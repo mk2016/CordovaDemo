@@ -298,6 +298,36 @@
     
 }
 
+- (void)appendTextArray:(NSArray *)texts isTitle:(BOOL)isTitle{
+    if (texts.count == 4) {
+        [self setAlignment:HLTextAlignmentLeft];
+        [self setFontSize:HLFontSizeTitleSmalle];
+        
+        NSInteger offset = 0;
+        if (!isTitle) {
+            offset = 10;
+        }
+        
+        if ([texts[0] length] > 0) {
+            [self setText:texts[0] maxChar:10];
+        }
+        
+        if ([texts[1] length] > 0) {
+            [self setOffset:100 + offset];
+            [self setText:texts[1]];
+        }
+        if ([texts[2] length] > 0) {
+            [self setOffset:200 + offset];
+            [self setText:texts[2]];
+        }
+        if ([texts[3] length] > 0) {
+            [self setOffset:300 + offset];
+            [self setText:texts[3]];
+        }
+        [self appendNewLine];
+    }
+}
+
 #pragma mark 图片
 - (void)appendImage:(UIImage *)image alignment:(HLTextAlignment)alignment maxWidth:(CGFloat)maxWidth{
     if (!image) {
@@ -381,10 +411,11 @@
 }
 
 - (void)appendFooter:(NSString *)footerInfo{
-    [self appendSeperatorLine];
-    if (!footerInfo) {
-        footerInfo = @"谢谢惠顾，欢迎下次光临！";
+    if (!footerInfo || footerInfo.length == 0) {
+//        footerInfo = @"谢谢惠顾，欢迎下次光临！";
+        return;
     }
+    [self appendSeperatorLine];
     [self appendText:footerInfo alignment:HLTextAlignmentCenter];
 }
 

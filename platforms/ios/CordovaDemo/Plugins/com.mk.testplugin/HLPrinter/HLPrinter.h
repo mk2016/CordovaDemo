@@ -86,6 +86,7 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
  *  @param fontSize 字号
  */
 - (void)appendTitle:(NSString *)title value:(NSString *)value valueOffset:(NSInteger)offset fontSize:(HLFontSize)fontSize;
+- (void)appendTextArray:(NSArray *)texts isTitle:(BOOL)isTitle;
 
 /**
  *  添加选购商品信息标题,一般是三列，名称、数量、单价
@@ -166,7 +167,7 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
  *  添加一条分割线，like this:---------------------------
  */
 - (void)appendSeperatorLine;
-
+- (void)appendNewLine;
 /**
  *  添加底部信息
  *
