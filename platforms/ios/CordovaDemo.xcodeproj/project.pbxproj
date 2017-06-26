@@ -21,6 +21,17 @@
 		C53CE0CD1EEE60B9009407FB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53CE0CC1EEE60B9009407FB /* CoreBluetooth.framework */; };
 		C54D146E1EF91ABE004E6310 /* MKBluetoothPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = C54D146D1EF91ABE004E6310 /* MKBluetoothPrinter.m */; };
 		C54D147D1EFAE190004E6310 /* MKPrinterInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C54D147C1EFAE190004E6310 /* MKPrinterInfoModel.m */; };
+		C54DD0481F00A97600E8CDFA /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0351F00A97600E8CDFA /* MJExtensionConst.m */; };
+		C54DD0491F00A97600E8CDFA /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0371F00A97600E8CDFA /* MJFoundation.m */; };
+		C54DD04A1F00A97600E8CDFA /* MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0391F00A97600E8CDFA /* MJProperty.m */; };
+		C54DD04B1F00A97600E8CDFA /* MJPropertyKey.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD03B1F00A97600E8CDFA /* MJPropertyKey.m */; };
+		C54DD04C1F00A97600E8CDFA /* MJPropertyType.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD03D1F00A97600E8CDFA /* MJPropertyType.m */; };
+		C54DD04D1F00A97600E8CDFA /* NSObject+MJClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD03F1F00A97600E8CDFA /* NSObject+MJClass.m */; };
+		C54DD04E1F00A97600E8CDFA /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0411F00A97600E8CDFA /* NSObject+MJCoding.m */; };
+		C54DD04F1F00A97600E8CDFA /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0431F00A97600E8CDFA /* NSObject+MJKeyValue.m */; };
+		C54DD0501F00A97600E8CDFA /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0451F00A97600E8CDFA /* NSObject+MJProperty.m */; };
+		C54DD0511F00A97600E8CDFA /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0471F00A97600E8CDFA /* NSString+MJExtension.m */; };
+		C54DD0551F00AC2D00E8CDFA /* NSObject+MKJsonAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0541F00AC2D00E8CDFA /* NSObject+MKJsonAdd.m */; };
 		C5DF32E81EF7B7C10093BF29 /* BluetoothPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DF32E71EF7B7C10093BF29 /* BluetoothPrinter.m */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +92,29 @@
 		C54D147A1EFAB524004E6310 /* CordovaDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CordovaDemo.entitlements; path = CordovaDemo/CordovaDemo.entitlements; sourceTree = "<group>"; };
 		C54D147B1EFAE190004E6310 /* MKPrinterInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKPrinterInfoModel.h; sourceTree = "<group>"; };
 		C54D147C1EFAE190004E6310 /* MKPrinterInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKPrinterInfoModel.m; sourceTree = "<group>"; };
+		C54DD0331F00A97600E8CDFA /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtension.h; sourceTree = "<group>"; };
+		C54DD0341F00A97600E8CDFA /* MJExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConst.h; sourceTree = "<group>"; };
+		C54DD0351F00A97600E8CDFA /* MJExtensionConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConst.m; sourceTree = "<group>"; };
+		C54DD0361F00A97600E8CDFA /* MJFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJFoundation.h; sourceTree = "<group>"; };
+		C54DD0371F00A97600E8CDFA /* MJFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJFoundation.m; sourceTree = "<group>"; };
+		C54DD0381F00A97600E8CDFA /* MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJProperty.h; sourceTree = "<group>"; };
+		C54DD0391F00A97600E8CDFA /* MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJProperty.m; sourceTree = "<group>"; };
+		C54DD03A1F00A97600E8CDFA /* MJPropertyKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyKey.h; sourceTree = "<group>"; };
+		C54DD03B1F00A97600E8CDFA /* MJPropertyKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyKey.m; sourceTree = "<group>"; };
+		C54DD03C1F00A97600E8CDFA /* MJPropertyType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyType.h; sourceTree = "<group>"; };
+		C54DD03D1F00A97600E8CDFA /* MJPropertyType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyType.m; sourceTree = "<group>"; };
+		C54DD03E1F00A97600E8CDFA /* NSObject+MJClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJClass.h"; sourceTree = "<group>"; };
+		C54DD03F1F00A97600E8CDFA /* NSObject+MJClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJClass.m"; sourceTree = "<group>"; };
+		C54DD0401F00A97600E8CDFA /* NSObject+MJCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJCoding.h"; sourceTree = "<group>"; };
+		C54DD0411F00A97600E8CDFA /* NSObject+MJCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJCoding.m"; sourceTree = "<group>"; };
+		C54DD0421F00A97600E8CDFA /* NSObject+MJKeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJKeyValue.h"; sourceTree = "<group>"; };
+		C54DD0431F00A97600E8CDFA /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
+		C54DD0441F00A97600E8CDFA /* NSObject+MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJProperty.h"; sourceTree = "<group>"; };
+		C54DD0451F00A97600E8CDFA /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
+		C54DD0461F00A97600E8CDFA /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
+		C54DD0471F00A97600E8CDFA /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
+		C54DD0531F00AC2D00E8CDFA /* NSObject+MKJsonAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MKJsonAdd.h"; sourceTree = "<group>"; };
+		C54DD0541F00AC2D00E8CDFA /* NSObject+MKJsonAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MKJsonAdd.m"; sourceTree = "<group>"; };
 		C5DF32E61EF7B7C10093BF29 /* BluetoothPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothPrinter.h; sourceTree = "<group>"; };
 		C5DF32E71EF7B7C10093BF29 /* BluetoothPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothPrinter.m; sourceTree = "<group>"; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
@@ -203,6 +237,7 @@
 		C509D6EF1EEBE370006B254E /* com.mk.testplugin */ = {
 			isa = PBXGroup;
 			children = (
+				C54DD0321F00A97600E8CDFA /* MJExtension */,
 				C5DF32E51EF7B7C10093BF29 /* BP */,
 				C53CE0BB1EEE5F51009407FB /* HLBluetooth */,
 				C53CE0BF1EEE5F51009407FB /* HLPrinter */,
@@ -236,6 +271,36 @@
 				C54D147C1EFAE190004E6310 /* MKPrinterInfoModel.m */,
 			);
 			path = HLPrinter;
+			sourceTree = "<group>";
+		};
+		C54DD0321F00A97600E8CDFA /* MJExtension */ = {
+			isa = PBXGroup;
+			children = (
+				C54DD0331F00A97600E8CDFA /* MJExtension.h */,
+				C54DD0341F00A97600E8CDFA /* MJExtensionConst.h */,
+				C54DD0351F00A97600E8CDFA /* MJExtensionConst.m */,
+				C54DD0361F00A97600E8CDFA /* MJFoundation.h */,
+				C54DD0371F00A97600E8CDFA /* MJFoundation.m */,
+				C54DD0381F00A97600E8CDFA /* MJProperty.h */,
+				C54DD0391F00A97600E8CDFA /* MJProperty.m */,
+				C54DD03A1F00A97600E8CDFA /* MJPropertyKey.h */,
+				C54DD03B1F00A97600E8CDFA /* MJPropertyKey.m */,
+				C54DD03C1F00A97600E8CDFA /* MJPropertyType.h */,
+				C54DD03D1F00A97600E8CDFA /* MJPropertyType.m */,
+				C54DD03E1F00A97600E8CDFA /* NSObject+MJClass.h */,
+				C54DD03F1F00A97600E8CDFA /* NSObject+MJClass.m */,
+				C54DD0401F00A97600E8CDFA /* NSObject+MJCoding.h */,
+				C54DD0411F00A97600E8CDFA /* NSObject+MJCoding.m */,
+				C54DD0421F00A97600E8CDFA /* NSObject+MJKeyValue.h */,
+				C54DD0431F00A97600E8CDFA /* NSObject+MJKeyValue.m */,
+				C54DD0441F00A97600E8CDFA /* NSObject+MJProperty.h */,
+				C54DD0451F00A97600E8CDFA /* NSObject+MJProperty.m */,
+				C54DD0531F00AC2D00E8CDFA /* NSObject+MKJsonAdd.h */,
+				C54DD0541F00AC2D00E8CDFA /* NSObject+MKJsonAdd.m */,
+				C54DD0461F00A97600E8CDFA /* NSString+MJExtension.h */,
+				C54DD0471F00A97600E8CDFA /* NSString+MJExtension.m */,
+			);
+			path = MJExtension;
 			sourceTree = "<group>";
 		};
 		C5DF32E51EF7B7C10093BF29 /* BP */ = {
@@ -371,14 +436,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C54DD04E1F00A97600E8CDFA /* NSObject+MJCoding.m in Sources */,
+				C54DD04C1F00A97600E8CDFA /* MJPropertyType.m in Sources */,
+				C54DD0481F00A97600E8CDFA /* MJExtensionConst.m in Sources */,
+				C54DD0551F00AC2D00E8CDFA /* NSObject+MKJsonAdd.m in Sources */,
+				C54DD04B1F00A97600E8CDFA /* MJPropertyKey.m in Sources */,
+				C54DD04F1F00A97600E8CDFA /* NSObject+MJKeyValue.m in Sources */,
 				C53CE0C71EEE5F51009407FB /* HLPrinter.m in Sources */,
 				C53CE0C91EEE5F51009407FB /* UIWebView+UIImage.m in Sources */,
+				C54DD0491F00A97600E8CDFA /* MJFoundation.m in Sources */,
+				C54DD0511F00A97600E8CDFA /* NSString+MJExtension.m in Sources */,
+				C54DD04A1F00A97600E8CDFA /* MJProperty.m in Sources */,
 				C54D147D1EFAE190004E6310 /* MKPrinterInfoModel.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				C54D146E1EF91ABE004E6310 /* MKBluetoothPrinter.m in Sources */,
+				C54DD0501F00A97600E8CDFA /* NSObject+MJProperty.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				C53CE0C61EEE5F51009407FB /* HLBLEManager.m in Sources */,
+				C54DD04D1F00A97600E8CDFA /* NSObject+MJClass.m in Sources */,
 				C5DF32E81EF7B7C10093BF29 /* BluetoothPrinter.m in Sources */,
 				C53CE0C81EEE5F51009407FB /* UIImage+Bitmap.m in Sources */,
 			);

@@ -10,14 +10,17 @@
 #import "HLPrinter.h"
 #import "MKConst.h"
 
+@interface MKPrinterModel : NSObject
+@property (nonatomic, strong) NSArray *infos;
+
+@end
+
 @interface MKPrinterInfoModel : NSObject
 @property (nonatomic, assign) MKBTPrinterInfoType infoType;             /*!< MKBTPrinterInfoType_text */
-//@property (nonatomic, strong) MKPrinterInfoDetailModel *detail;
-
-@property (nonatomic, copy) NSString *text;
+@property (nonatomic, copy  ) NSString *text;
+@property (nonatomic, strong) NSArray *textArray;
 @property (nonatomic, assign) MKBTPrinterFontType fontType;             /*!< MKBTPrinterFontType_smalle */
 @property (nonatomic, assign) MKBTPrinterAlignmentType aligmentType;    /*!< MKBTPrinterAlignmentType_center */
-@property (nonatomic, strong) NSArray *textArray;
 @property (nonatomic, assign) CGFloat maxWidth;     /*!< barCode:maxWidth */
 @property (nonatomic, assign) CGFloat qrCodeSize;   /*!< qrCode:size */
 @property (nonatomic, assign) CGFloat offset;       /*!< titleValue:offset */
@@ -30,7 +33,8 @@
  * defult:
  * aligmentType : MKBTPrinterAlignmentType_center
  * fontType     : MKBTPrinterFontType_smalle
- * 
+ * maxWidth     : 300
+ * qrCodeSize   : 12
  *
  * MKBTPrinterInfoType_text         aligmentType    fontType
  * MKBTPrinterInfoType_textList     2列  offset      fontType

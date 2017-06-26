@@ -7,13 +7,26 @@
 //
 
 #import "MKPrinterInfoModel.h"
+#import "MJExtension.h"
+
+@implementation MKPrinterModel
++ (NSDictionary *)mj_objectClassInArray{
+    return @{
+             @"infos" : @"MKPrinterInfoModel"
+             };
+}
+
+@end
 
 @implementation MKPrinterInfoModel
+MJCodingImplementation
 - (id)init{
     if (self = [super init]) {
         _infoType = MKBTPrinterInfoType_text;
         _fontType = MKBTPrinterFontType_smalle;
         _aligmentType = MKBTPrinterAlignmentType_center;
+        _maxWidth = 300;
+        _qrCodeSize = 12;
     }
     return self;
 }
@@ -40,20 +53,6 @@
     }else{
         return HLTextAlignmentCenter;
     }
-}
-
-- (CGFloat)maxWidth{
-    if (_maxWidth <= 0) {
-        _maxWidth = 300;
-    }
-    return _maxWidth;
-}
-
-- (CGFloat)qrCodeSize{
-    if (_qrCodeSize <= 0) {
-        _qrCodeSize = 12;
-    }
-    return _qrCodeSize;
 }
 
 @end

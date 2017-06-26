@@ -35,25 +35,23 @@
 - (void)connectPeripheral:(CDVInvokedUrlCommand *)command;
 
 /** 
- * 拼接数据
- * 参数：[index, type, ......],  
- * index: 打印信息 排序 id
- * type:  打印信息的 类型
- * ...... : 根据打印信息的类型区分  
+ * 设置打印信息
+ * 参数： json 数组
  */
-- (void)appentData:(CDVInvokedUrlCommand *)command;
+- (void)createPrinterInfo:(CDVInvokedUrlCommand *)command;
 
 /** 确认打印 */
 - (void)finalPrinter:(CDVInvokedUrlCommand *)command;
 
-/** 重置打印数据 */
-- (void)resetPrinterInfo:(CDVInvokedUrlCommand *)command;
+/** 断开外设连接 */
+- (void)stopPeripheralConnection:(CDVInvokedUrlCommand *)command;
+
+/** 清除打印数据 */
+- (void)clearPrinterInfo:(CDVInvokedUrlCommand *)command;
 
 /** 打印log */
 - (void)printLog:(CDVInvokedUrlCommand *)command;
 
-/** 断开外设连接 */
-- (void)stopPeripheralConnection:(CDVInvokedUrlCommand *)command;
 @end
 
 
