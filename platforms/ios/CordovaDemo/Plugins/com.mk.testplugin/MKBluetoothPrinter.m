@@ -11,7 +11,6 @@
 #import "HLPrinter.h"
 #import "MKConst.h"
 #import "MKPrinterInfoModel.h"
-#import "MJExtension.h"
 
 @interface MKBluetoothPrinter ()
 @property (nonatomic, strong) HLBLEManager *manager;
@@ -218,8 +217,8 @@
             NSString *jsonStr = command.arguments[0];
             ELog(@"jsonStr : %@", jsonStr);
 //            [self createTestDate];
-            NSArray *array = [MKPrinterInfoModel mj_objectArrayWithKeyValuesArray:jsonStr];
-            if (array == nil || array.count == 0) {
+            NSArray *array = [jsonStr mk_jsonString2Dictionary];
+            if (![array isKindOfClass:[NSArray class]] || array == nil || array.count == 0) {
                 [self callBackSuccess:NO callBackId:command.callbackId message:@"参数异常"];
                 return;
             }
@@ -227,7 +226,36 @@
             [self.printerModelArray addObjectsFromArray:array];
             _printerInfo = nil;
 
-            for (MKPrinterInfoModel *model in self.printerModelArray) {
+            for (NSDictionary *dic in self.printerModelArray) {
+                MKPrinterInfoModel *model = [[MKPrinterInfoModel alloc] init];
+                if ([dic valueForKey:@"infoType"]) {
+                    model.infoType = [[dic valueForKey:@"infoType"] integerValue];
+                }
+                if ([dic valueForKey:@"text"]){
+                    model.text = [dic valueForKey:@"text"];
+                }
+                if ([dic valueForKey:@"textArray"]){
+                    model.textArray = [dic valueForKey:@"textArray"];
+                }
+                if ([dic valueForKey:@"fontType"]){
+                    model.fontType = [[dic valueForKey:@"fontType"] integerValue];
+                }
+                if ([dic valueForKey:@"aligmentType"]){
+                    model.aligmentType = [[dic valueForKey:@"aligmentType"] integerValue];
+                }
+                if ([dic valueForKey:@"maxWidth"]){
+                    model.maxWidth = [[dic valueForKey:@"maxWidth"] floatValue];
+                }
+                if ([dic valueForKey:@"qrCodeSize"]){
+                    model.qrCodeSize = [[dic valueForKey:@"qrCodeSize"] floatValue];
+                }
+                if ([dic valueForKey:@"offset"]){
+                    model.offset = [[dic valueForKey:@"offset"] floatValue];
+                }
+                if ([dic valueForKey:@"isTitle"]){
+                    model.isTitle = [[dic valueForKey:@"isTitle"] integerValue];
+                }
+                
                 switch (model.infoType) {
                     case MKBTPrinterInfoType_text:
                         [self.printerInfo appendText:model.text alignment:[model getAlignment] fontSize:[model getFontSize]];
@@ -515,12 +543,6 @@
         model.text = @"谢谢光临";
         [self.printerModelArray addObject:model];
     }
-    MKPrinterModel *model = [[MKPrinterModel alloc] init];
-    model.infos = self.printerModelArray.copy;
-    
-    NSString *str = [model mk_jsonString];
-    ELog(@"%@",str);
-    
 }
 
 

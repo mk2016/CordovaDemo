@@ -7,19 +7,8 @@
 //
 
 #import "MKPrinterInfoModel.h"
-#import "MJExtension.h"
-
-@implementation MKPrinterModel
-+ (NSDictionary *)mj_objectClassInArray{
-    return @{
-             @"infos" : @"MKPrinterInfoModel"
-             };
-}
-
-@end
 
 @implementation MKPrinterInfoModel
-MJCodingImplementation
 - (id)init{
     if (self = [super init]) {
         _infoType = MKBTPrinterInfoType_text;

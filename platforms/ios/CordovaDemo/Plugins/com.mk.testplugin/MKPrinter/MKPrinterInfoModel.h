@@ -10,10 +10,7 @@
 #import "HLPrinter.h"
 #import "MKConst.h"
 
-@interface MKPrinterModel : NSObject
-@property (nonatomic, strong) NSArray *infos;
 
-@end
 
 @interface MKPrinterInfoModel : NSObject
 @property (nonatomic, assign) MKBTPrinterInfoType infoType;             /*!< MKBTPrinterInfoType_text */
