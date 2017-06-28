@@ -51,8 +51,8 @@
                 printerHelper.appendSeperatorLine();
 
                 printerHelper.appendTextList(["商品","数量","单价"],1);
-                printerHelper.appendTextList(["铅笔","5","2.0"]);
-                printerHelper.appendTextList(["橡皮","1","1.0"]);
+                printerHelper.appendTextList(["铅笔",5,2.0]);
+                printerHelper.appendTextList(["橡皮",1,1.0]);
                 printerHelper.appendSeperatorLine();
 
                 printerHelper.appendTextList(["商品","单价","数量","总价"],1);
@@ -73,7 +73,7 @@
 
             function getPrinterJsonString(){
                 var jsonStr = printerHelper.getPrinterInfoJsonString();
-            }    
+            }
             
             //开始扫描设备
             function scanForPeripherals() {
