@@ -1,3 +1,64 @@
+var exec = require("cordova/exec");
+
+function BluetoothPrinter(){};
+
+/*
+ * 开始扫描设备
+ * keep：是否持续回调 （0：否， 1：是，default:0）
+ *
+ * 返回的设备列表json数组
+ * [{"id":"9A87E98E-BE88-5BA6-2C31-ED4869300E6E","name":"Printer_2EC1","uuid":"9A87E98E-BE88-5BA6-2C31-ED4869300E6E"}]
+ * 返回扫描到的外设列表信息(有可能为空)，在扫描的回调中返回，会有延时
+ */
+BluetoothPrinter.prototype.scanForPeripherals = function(success, fail, keep){
+    exec(success, fail, 'MKBluetoothPrinter', 'scanForPeripherals', [keep]);
+}
+
+/**
+ * 获取 外设列表
+ * 调用后马上返回已经扫描到的外设列表。
+ * 返回的设备列表json数组：
+ * [{"id":"9A87E98E-BE88-5BA6-2C31-ED4869300E6E","name":"Printer_2EC1","uuid":"9A87E98E-BE88-5BA6-2C31-ED4869300E6E"}]
+ */
+BluetoothPrinter.prototype.getDeviceList = function(success, fail){
+    exec(success,fail, 'MKBluetoothPrinter', 'getPeripherals',[]);
+}
+
+/**
+ * 连接外设
+ * 参数:[uuid],  从已经获取到的外设列表，选择要连接的设备信息中获取UUID
+ * 连接成功后，停止扫描。
+ */
+BluetoothPrinter.prototype.connectPeripheral = function(success, fail, uuid){
+    exec(success, fail, 'MKBluetoothPrinter', 'connectPeripheral', [uuid]);
+}
+
+/**
+ * 设置打印信息
+ * 参数jsonString， json数组字符串
+ */
+BluetoothPrinter.prototype.setPrinterInfo = function(success, fail, jsonString){
+    exec(success, fail, 'MKBluetoothPrinter', 'createPrinterInfo', [jsonString]);
+}
+
+//确认打印
+BluetoothPrinter.prototype.finalPrinter = function(success, fail){
+    exec(success, fail, 'MKBluetoothPrinter', 'finalPrinter', []);
+}
+
+//断开连接
+BluetoothPrinter.prototype.stopConnection = function(success, fail){
+    exec(success, fail, 'MKBluetoothPrinter', 'stopPeripheralConnection', []);
+}
+
+//在Xcode控制台打印log
+BluetoothPrinter.prototype.printOCLog = function(success, fail, message){
+    exec(success, fail, 'MKBluetoothPrinter', 'printLog', [message]);
+}
+
+
+
+
 //=================================================
 //enum
 //  信息类型
@@ -25,6 +86,9 @@ if (typeof BTPAlignmentType == "undefined"){
     BTPAlignmentType.center = 1;
     BTPAlignmentType.right  = 2;
 }
+
+
+
 
 
 //=================================================
@@ -60,7 +124,7 @@ PrinterInfoHelper.prototype.appendText = function (text, alignment, fontType) {
 }
 
 /* 列表信息
- * textList     : 信息列表，
+ * textList:    信息列表，
  * offset       : 实际值偏移量    optional
  */
 PrinterInfoHelper.prototype.appendTextList = function (textList, offset) {
@@ -133,10 +197,18 @@ PrinterInfoHelper.prototype.getPrinterInfoJsonString = function(){
     return jsonStr;
 }
 
+var printerHelper = new BluetoothPrinter();
 var printerInfoHelper = new PrinterInfoHelper();
 
+window.printerHelper = printerHelper;
 window.printerInfoHelper = printerInfoHelper;
 window.BTPInfoType = BTPInfoType;
 window.BTPFontType = BTPFontType;
 window.BTPAlignmentType = BTPAlignmentType;
 
+
+module.exports.printerHelper = printerHelper;
+module.exports.printerInfoHelper = printerInfoHelper;
+module.exports.BTPInfoType = BTPInfoType;
+module.exports.BTPFontType = BTPFontType;
+module.exports.BTPAlignmentType = BTPAlignmentType;
