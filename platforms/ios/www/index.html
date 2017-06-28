@@ -7,7 +7,7 @@
             <script type="text/javascript" charset="utf-8" src="BluetoothPrinter.js"></script>
             <script type="text/javascript" charset="utf-8">
                 
-                //开始扫描设备
+            //开始扫描设备
             function scanForPeripherals() {
                 printerHelper.scanForPeripherals(getDeviceListSuccess, failedCallBack, 1);
             }
@@ -17,15 +17,21 @@
                 printerHelper.getDeviceList(getDeviceListSuccess, failedCallBack);
             }
             
+            var devicesList = null;
             //获取设备列表成功回调
             function getDeviceListSuccess(msg){
                 var megStr = JSON.stringify(msg)
                 printOCLog("getDevices:"+megStr);
+                devicesList = msg;
             }
             
             //连接设备
             function connectPeripheral(){
-                printerHelper.connectPeripheral(printOCLogSuccess, failedCallBack, "C2A0C2FB-98D0-4849-845C-5E6707912772");
+                var uuidStr = ""
+                if (devicesList.length > 0){
+                    uuidStr = devicesList[0].uuid;
+                }
+                printerHelper.connectPeripheral(printOCLogSuccess, failedCallBack, uuidStr);
             }
             
             //生成打印信息

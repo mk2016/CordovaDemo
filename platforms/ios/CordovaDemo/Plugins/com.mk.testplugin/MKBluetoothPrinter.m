@@ -329,31 +329,34 @@
 
 #pragma mark - ***** final Printer *****
 - (void)finalPrinter:(CDVInvokedUrlCommand *)command{
-    if (self.servicesArray.count > 0) {
-        for (CBService *service in self.servicesArray) {
-            for (CBCharacteristic *character in service.characteristics) {
-                CBCharacteristicProperties properties = character.properties;
-                if (properties & CBCharacteristicPropertyWrite) {
-                    self.chatacter = character;
+    [self.commandDelegate runInBackground:^{
+        if (self.servicesArray.count > 0) {
+            for (CBService *service in self.servicesArray) {
+                for (CBCharacteristic *character in service.characteristics) {
+                    CBCharacteristicProperties properties = character.properties;
+                    if (properties & CBCharacteristicPropertyWrite) {
+                        self.chatacter = character;
+                    }
                 }
             }
         }
-    }
-    
-    if (self.chatacter) {
-        NSData *mainData = [self.printerInfo getFinalData];
-        if (self.chatacter.properties & CBCharacteristicPropertyWrite) {
-            [self.manager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithResponse completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
-                if (!error) {
-                    ELog(@"写入成功");
-                }
-            }];
-        } else if (self.chatacter.properties & CBCharacteristicPropertyWriteWithoutResponse) {
-            [self.manager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithoutResponse];
+        
+        if (self.chatacter) {
+            NSData *mainData = [self.printerInfo getFinalData];
+            if (self.chatacter.properties & CBCharacteristicPropertyWrite) {
+                [self.manager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithResponse completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
+                    if (!error) {
+                        ELog(@"写入成功");
+                    }
+                }];
+            } else if (self.chatacter.properties & CBCharacteristicPropertyWriteWithoutResponse) {
+                [self.manager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithoutResponse];
+            }
+        }else{
+            [self callBackSuccess:NO callBackId:command.callbackId message:@"未能找到可写入的服务"];
         }
-    }else{
-        [self callBackSuccess:NO callBackId:command.callbackId message:@"未能找到可写入的服务"];
-    }
+
+    }];
 }
 
 /** 断开连接 */
