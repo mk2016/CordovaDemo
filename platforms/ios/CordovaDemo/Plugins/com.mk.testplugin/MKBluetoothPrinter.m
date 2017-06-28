@@ -95,15 +95,42 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:self.scanPeripheralsCallBackId];
 }
 
+#pragma mark - ***** get peripherals *****
+- (void)getPeripherals:(CDVInvokedUrlCommand *)command{
+    NSMutableArray *peripherals = [self getPeripheralList];
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray: peripherals];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+- (NSMutableArray *)getPeripheralList {
+    NSMutableArray *peripherals = @[].mutableCopy;
+    for (int i = 0; i < self.peripheralsArray.count; i++) {
+        NSMutableDictionary *peripheralDic = @{}.mutableCopy;
+        CBPeripheral *p = [self.peripheralsArray objectAtIndex:i];
+        
+        NSString *uuid = p.identifier.UUIDString;
+        [peripheralDic setObject:uuid forKey:@"uuid"];
+        [peripheralDic setObject:uuid forKey:@"id"];
+        NSString *name = [p name];
+        if (!name) {
+            name = [peripheralDic objectForKey:@"uuid"];
+        }
+        [peripheralDic setObject:name forKey:@"name"];
+        [peripherals addObject:peripheralDic];
+    }
+    return peripherals;
+}
+
+
 #pragma mark - ***** connect Peripheral *****
 - (void)connectPeripheral:(CDVInvokedUrlCommand *)command{
     if (command.arguments.count == 0) {
-        [self callBackSuccess:NO callBackId:command.callbackId message:@"请传入需要链接设备的ID"];
+        [self callBackSuccess:NO callBackId:command.callbackId message:@"请传入需要链接设备的uuid"];
         return;
     }
     if (command.arguments.count > 0 && [command.arguments[0] isKindOfClass:[NSString class]]) {
         if (command.arguments[0] == nil || [command.arguments[0] length] == 0) {
-            [self callBackSuccess:NO callBackId:command.callbackId message:@"请传入需要链接设备的ID"];
+            [self callBackSuccess:NO callBackId:command.callbackId message:@"请传入需要链接设备的uuid"];
             return;
         }
     }
@@ -116,7 +143,7 @@
     }else if ([command.arguments[0] isKindOfClass:[NSString class]]){
         peripheralId = command.arguments[0];
     }else{
-        [self callBackSuccess:NO callBackId:command.callbackId message:@"传入设备ID的类型错误"];
+        [self callBackSuccess:NO callBackId:command.callbackId message:@"传入设备uuid的类型错误"];
         return;
     }
     
@@ -130,7 +157,7 @@
         }
     }
     if (self.connectPeripheral == nil) {
-        [self callBackSuccess:NO callBackId:command.callbackId message:@"未找到此ID的设备"];
+        [self callBackSuccess:NO callBackId:command.callbackId message:@"未找到此uuid的设备"];
         return;
     }
     [self.manager connectPeripheral:self.connectPeripheral
@@ -183,31 +210,7 @@
                       }];
 }
 
-#pragma mark - ***** 获取 设备列表 *****
-- (void)getPeripherals:(CDVInvokedUrlCommand *)command{
-    NSMutableArray *peripherals = [self getPeripheralList];
-    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray: peripherals];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-}
 
-- (NSMutableArray *)getPeripheralList {
-    NSMutableArray *peripherals = @[].mutableCopy;
-    for (int i = 0; i < self.peripheralsArray.count; i++) {
-        NSMutableDictionary *peripheralDic = @{}.mutableCopy;
-        CBPeripheral *p = [self.peripheralsArray objectAtIndex:i];
-        
-        NSString *uuid = p.identifier.UUIDString;
-        [peripheralDic setObject:uuid forKey:@"uuid"];
-        [peripheralDic setObject:uuid forKey:@"id"];
-        NSString *name = [p name];
-        if (!name) {
-            name = [peripheralDic objectForKey:@"uuid"];
-        }
-        [peripheralDic setObject:name forKey:@"name"];
-        [peripherals addObject:peripheralDic];
-    }
-    return peripherals;
-}
 
 
 #pragma mark - ***** setup printer info *****
@@ -223,7 +226,7 @@
             }
             NSArray *array = [jsonStr mk_jsonString2Dictionary];
             if (![array isKindOfClass:[NSArray class]] || array == nil || array.count == 0) {
-                [self callBackSuccess:NO callBackId:command.callbackId message:@"参数异常"];
+                [self callBackSuccess:NO callBackId:command.callbackId message:@"参数解析Json错误"];
                 return;
             }
             [self.printerModelArray removeAllObjects];
@@ -297,7 +300,7 @@
             [self.printerInfo appendNewLine];
         }
 
-        [self callBackSuccess:YES callBackId:command.callbackId message:@"成功"];
+        [self callBackSuccess:YES callBackId:command.callbackId message:@"设置打印数据成功"];
     }];
 }
 
@@ -324,7 +327,7 @@
     }
 }
 
-/** 确认打印 */
+#pragma mark - ***** final Printer *****
 - (void)finalPrinter:(CDVInvokedUrlCommand *)command{
     if (self.servicesArray.count > 0) {
         for (CBService *service in self.servicesArray) {
@@ -348,6 +351,8 @@
         } else if (self.chatacter.properties & CBCharacteristicPropertyWriteWithoutResponse) {
             [self.manager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithoutResponse];
         }
+    }else{
+        [self callBackSuccess:NO callBackId:command.callbackId message:@"未能找到可写入的服务"];
     }
 }
 
@@ -359,7 +364,7 @@
 
 
 
-
+/** 清理打印数据 */
 - (void)clearPrinterInfo:(CDVInvokedUrlCommand *)command{
     _printerInfo = nil;
 }
