@@ -305,7 +305,7 @@
         
         NSInteger offset = 0;
         if (!isTitle) {
-            offset = 10;
+            offset = 5;
         }
         
         if ([texts[0] length] > 0) {
@@ -313,11 +313,11 @@
         }
         
         if ([texts[1] length] > 0) {
-            [self setOffset:100 + offset];
+            [self setOffset:140 + offset];
             [self setText:texts[1]];
         }
         if ([texts[2] length] > 0) {
-            [self setOffset:200 + offset];
+            [self setOffset:220 + offset];
             [self setText:texts[2]];
         }
         if ([texts[3] length] > 0) {

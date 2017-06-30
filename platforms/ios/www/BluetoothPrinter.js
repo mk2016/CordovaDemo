@@ -133,12 +133,14 @@ PrinterInfoHelper.prototype.appendText = function (text, alignment, fontType) {
 
 /* 列表信息
  * textList     : 信息列表，
+ * isTitle      : 是否标题       optional   1是，0否，  default：0
  * offset       : 实际值偏移量    optional （只有在 2列的情况下有效）
  */
-PrinterInfoHelper.prototype.appendTextList = function (textList, offset) {
+PrinterInfoHelper.prototype.appendTextList = function (textList, isTitle, offset) {
     var infoModel = new Object();
     infoModel.infoType = BTPInfoType.textList;
     infoModel.textArray = textList;
+    infoModel.isTitle = isTitle
     infoModel.offset = offset;
     _printerInfos.push(infoModel);
 }

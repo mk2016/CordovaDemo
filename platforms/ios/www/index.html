@@ -32,7 +32,7 @@
                     uuidStr = devicesList[0].uuid;
                 }
                 printOCLog(uuidStr);
-                printerHelper.connectPeripheral(printOCLogSuccess, failedCallBack, uuidStr);
+                printerHelper.connectPeripheral(printOCLogSuccess, failedCallBack, "C2A0C2FB-98D0-4849-845C-5E6707912772");
             }
             
             //生成打印信息
@@ -43,15 +43,16 @@
                 printerInfoHelper.appendText('test_title', BTPAlignmentType.center, BTPFontType.middle);
                 printerInfoHelper.appendText('测试电商服务中心(销售单)');
                 
-                // printerInfoHelper.appendBarCode('123456789012');
-                // printerInfoHelper.appendSeperatorLine();
+                printerInfoHelper.appendBarCode('123456789012');
+                printerInfoHelper.appendSeperatorLine();
                 
-                // printerInfoHelper.appendTextList(["时间", "2016-04-27 10:01:50"],0,150);
-                // printerInfoHelper.appendTextList(["订单", "4000020160427100150"],0,150);
-                // printerInfoHelper.appendTextList(["其他", "无"]);
+                printerInfoHelper.appendTextList(["left", "right"]);
+                printerInfoHelper.appendTextList(["时间", "2016-04-27 10:01:50"],0,150);
+                printerInfoHelper.appendTextList(["订单", "4000020160427100150"],0,150);
+                printerInfoHelper.appendTextList(["其他", "无"]);
                 
-                // printerInfoHelper.appendText("地址:深圳市南山区学府路东深大店阿里看到解放啦肯德基边上", BTPAlignmentType.left);
-                // printerInfoHelper.appendSeperatorLine();
+                printerInfoHelper.appendText("地址:深圳市南山区学府路东深大店阿里看到解放啦肯德基边上", BTPAlignmentType.left);
+                printerInfoHelper.appendSeperatorLine();
                 
                 printerInfoHelper.appendTextList(["商品","数量","单价"],1);
                 printerInfoHelper.appendTextList(["铅笔",5,2.0]);
@@ -63,10 +64,10 @@
                 printerInfoHelper.appendTextList(["本子","4.00","10","40.00"]);
                 printerInfoHelper.appendSeperatorLine();
                 
-                // printerInfoHelper.appendTextList(["总计:", "20"]);
-                // printerInfoHelper.appendTextList(["实收:","100.00"]);
-                // printerInfoHelper.appendTextList(["找零:","80.00"]);
-                // printerInfoHelper.appendSeperatorLine();
+                printerInfoHelper.appendTextList(["总计:", "20"]);
+                printerInfoHelper.appendTextList(["实收:","100.00"]);
+                printerInfoHelper.appendTextList(["找零:","80.00"]);
+                printerInfoHelper.appendSeperatorLine();
                 
                 printerInfoHelper.appendQrCode("www.baidu.com",10);
                 printerInfoHelper.appendImage(getImageBase64(),10);
