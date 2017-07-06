@@ -19,6 +19,8 @@
 #   define DebugStatus NO
 #endif
 
+#define MKBlockExec(block, ...) if (block) { block(__VA_ARGS__); };
+
 typedef NS_ENUM(NSInteger, MKBTPrinterInfoType) {
     MKBTPrinterInfoType_text            = 0,
     MKBTPrinterInfoType_textList        = 1,

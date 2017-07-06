@@ -9,6 +9,9 @@
 #import <Cordova/CDVPlugin.h>
 #import "MKConst.h"
 
+
+typedef void(^CommandBlcok)(BOOL success, NSString *message);
+
 @interface MKBluetoothPrinter : CDVPlugin
 
 /** 
@@ -19,6 +22,8 @@
  */
 - (void)scanForPeripherals:(CDVInvokedUrlCommand *)command;
 
+/** 停止扫描 */
+- (void)stopScan:(CDVInvokedUrlCommand *)command;
 
 /** 
  * 获取 外设列表
