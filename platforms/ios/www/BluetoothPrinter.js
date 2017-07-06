@@ -86,7 +86,8 @@ if (typeof BTPInfoType == "undefined"){
     BTPInfoType.qrCode          = 3;
     BTPInfoType.image           = 4;
     BTPInfoType.seperatorLine   = 5;
-    BTPInfoType.footer          = 6;
+    BTPInfoType.spaceLine       = 6;
+    BTPInfoType.footer          = 7;
 }
 //  字号大小 default:smalle
 if (typeof BTPFontType == "undefined"){
@@ -118,7 +119,6 @@ if (typeof BTPAlignmentType == "undefined"){
  infoModel.aligmentType = MKBTPAlignmentType.center;    对齐方式
  infoModel.maxWidth = 300;                              图片宽度
  infoModel.qrCodeSize = 12;                             二维码大小（1-16）
- infoModel.offset = 150;                                实际偏移值
  infoModel.isTitle = 0;                                 是否标题
  */
 
@@ -150,14 +150,12 @@ PrinterInfoHelper.prototype.appendText = function (text, alignment, fontType) {
 /* 列表信息
  * textList     : 信息列表，
  * isTitle      : 是否标题       optional   1是，0否，  default：0
- * offset       : 实际值偏移量    optional （只有在 2列的情况下有效）
  */
-PrinterInfoHelper.prototype.appendTextList = function (textList, isTitle, offset) {
+PrinterInfoHelper.prototype.appendTextList = function (textList, isTitle) {
     var infoModel = new Object();
     infoModel.infoType = BTPInfoType.textList;
     infoModel.textArray = textList;
     infoModel.isTitle = isTitle
-    infoModel.offset = offset;
     _printerInfos.push(infoModel);
 }
 
@@ -207,6 +205,13 @@ PrinterInfoHelper.prototype.appendImage = function (text, maxWidth, alignment){
 PrinterInfoHelper.prototype.appendSeperatorLine = function(){
     var infoModel = new Object();
     infoModel.infoType = BTPInfoType.seperatorLine;
+    _printerInfos.push(infoModel);
+}
+
+//空行
+PrinterInfoHelper.prototype.appendSpaceLine = function(){
+    var infoModel = new Object();
+    infoModel.infoType = BTPInfoType.spaceLine;
     _printerInfos.push(infoModel);
 }
 

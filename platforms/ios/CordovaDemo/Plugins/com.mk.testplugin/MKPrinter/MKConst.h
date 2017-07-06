@@ -28,7 +28,8 @@ typedef NS_ENUM(NSInteger, MKBTPrinterInfoType) {
     MKBTPrinterInfoType_qrCode          = 3,
     MKBTPrinterInfoType_image           = 4,
     MKBTPrinterInfoType_seperatorLine   = 5,
-    MKBTPrinterInfoType_footer          = 6,
+    MKBTPrinterInfoType_spaceLine       = 6,
+    MKBTPrinterInfoType_footer          = 7,
 };
 
 typedef NS_ENUM(NSInteger, MKBTPrinterFontType) {

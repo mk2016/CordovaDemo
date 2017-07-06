@@ -192,9 +192,7 @@
     __weak MKBluetoothPrinter *weakSelf = self;
     [self scanForPeripheralsWithBlock:^(BOOL success, NSString *message) {
         if (success && weakSelf.peripheralsArray.count > 0) {
-            [self connectPeripheralWith:name block:^(BOOL success, NSString *message) {
-                
-            }];
+            [self connectPeripheralWith:name block:nil];
         }
     }];
 }
@@ -421,7 +419,8 @@
                 [self.printerInfo appendBarCodeWithInfo:model.text alignment:[model getAlignment] maxWidth:model.maxWidth];
                 break;
             case MKBTPrinterInfoType_qrCode:
-                [self.printerInfo appendQRCodeWithInfo:model.text size:model.qrCodeSize alignment:[model getAlignment]];
+//                [self.printerInfo appendQRCodeWithInfo:model.text size:model.qrCodeSize alignment:[model getAlignment]];
+                [self.printerInfo appendQRCodeWithInfo:model.text];
                 break;
             case MKBTPrinterInfoType_image:{
                 UIImage *image = [UIImage mk_imageWithBase64:model.text];
@@ -433,6 +432,9 @@
             case MKBTPrinterInfoType_seperatorLine:
                 [self.printerInfo appendSeperatorLine];
                 break;
+            case MKBTPrinterInfoType_spaceLine:
+                [self.printerInfo appendSpaceLine];
+                break;
             case MKBTPrinterInfoType_footer:
                 [self.printerInfo appendFooter:model.text];
                 break;
@@ -440,8 +442,12 @@
                 break;
         }
     }
-    [self.printerInfo appendNewLine];
-    [self.printerInfo appendNewLine];
+    [self.printerInfo appendSpaceLine];
+    [self.printerInfo appendSpaceLine];
+    [self.printerInfo appendSpaceLine];
+    [self.printerInfo appendSpaceLine];
+    [self.printerInfo appendSpaceLine];
+    [self.printerInfo appendCutPaper];
 }
 
 - (void)appentTextListWith:(MKPrinterInfoModel *)model{
@@ -455,11 +461,7 @@
     }
     
     if (model.textArray.count == 2) {
-        if (model.offset > 0) {
-            [self.printerInfo appendTitle:tempAry[0] value:tempAry[1] valueOffset:model.offset fontSize:[model getFontSize]];
-        }else{
-            [self.printerInfo appendTitle:tempAry[0] value:tempAry[1]];
-        }
+        [self.printerInfo appendTitle:tempAry[0] value:tempAry[1]];
     }else if (model.textArray.count == 3){
         [self.printerInfo appendLeftText:tempAry[0] middleText:tempAry[1] rightText:tempAry[2] isTitle:model.isTitle == 1];
     }else if (model.textArray.count == 4){
