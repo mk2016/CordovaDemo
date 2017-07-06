@@ -25,23 +25,15 @@
 
 @implementation MKBluetoothPrinter
 
-- (void)autoConnectPeripheral{
-    if (self.connectPeripheral) {
-        ELog(@"已连接");
-    }else if (self.peripheralsArray && self.peripheralsArray.count > 0){
-        NSString *peripheralName = [self getHistoryPeripheralName];
-        if (peripheralName) {
-            [self connectPeripheralWith:peripheralName block:^(BOOL success, NSString *message) {
-                if (success) {
-                    ELog(@"%@", message);
-                }
-            }];
-        }
-    }
+/** 自动连接 */
+- (void)autoConnectPeripheral:(CDVInvokedUrlCommand *)command{
+    [self autoConnectPeripheral];
 }
 
-- (void)scanForPeripheralsAndConnect{
-    [self scanForPeripherals:nil];
+/** 是否已连接 */
+- (void)isConnectPeripheral:(CDVInvokedUrlCommand *)command{
+    NSString *b = self.connectPeripheral != nil ? @"1" : @"0";
+    [self callBackSuccess:YES callBackId:command.callbackId message:b];
 }
 
 #pragma mark - ***** scan peripherals *****
@@ -133,41 +125,10 @@
     }];
 }
 
-/** set printer info */
-- (void)createPrinterInfo:(CDVInvokedUrlCommand *)command{
-    [self.commandDelegate runInBackground:^{
-        if (command.arguments.count > 0 && command.arguments[0] != [NSNull null]) {
-            NSString *jsonStr = command.arguments[0];
-            __weak MKBluetoothPrinter *weakSelf = self;
-            [self setPrinterInfoWithJsonString:jsonStr block:^(BOOL success, NSString *message) {
-                [weakSelf callBackSuccess:success callBackId:command.callbackId message:message];
-            }];
-        }else{
-            [self callBackSuccess:NO callBackId:command.callbackId message:@"error: not find param with printer info"];
-        }
-    }];
-}
-
-/** printer */
-- (void)finalPrinter:(CDVInvokedUrlCommand *)command{
-    [self.commandDelegate runInBackground:^{
-        __weak MKBluetoothPrinter *weakSelf = self;
-        [self finalPrinterWithBlock:^(BOOL success, NSString *message) {
-            [weakSelf callBackSuccess:success callBackId:command.callbackId message:message];
-        }];
-    }];
-}
-
 /** 断开连接 */
 - (void)stopPeripheralConnection:(CDVInvokedUrlCommand *)command{
     [self stopPeripheralConnection];
     [self callBackSuccess:YES callBackId:command.callbackId message:@"stop peripheral connection"];
-}
-
-/** 清理打印数据 */
-- (void)clearPrinterInfo:(CDVInvokedUrlCommand *)command{
-    [self clearPrinterInfo];
-    [self callBackSuccess:YES callBackId:command.callbackId message:@"clear printer info success"];
 }
 
 /** 控制台打印 log */
@@ -202,6 +163,42 @@
 
 #pragma mark - **************************************************
 #pragma mark - ***** OC method *****
+/** 扫描 并连接 设备 历史设备 */
+- (void)autoConnectPeripheral{
+    if (self.connectPeripheral) {
+        ELog(@"已连接");
+        return;
+    }
+    NSString *peripheralName = [self getHistoryPeripheralName];
+    if (peripheralName) {
+        if (self.peripheralsArray.count > 0){
+            __weak MKBluetoothPrinter *weakSelf = self;
+            [self connectPeripheralWith:peripheralName block:^(BOOL success, NSString *message) {
+                if (success) {
+                    ELog(@"autoConnectPeripheral : %@", message);
+                }else{
+                    [weakSelf scanPeripheralsAndConnectWithPeripheralName:peripheralName];
+                }
+            }];
+            return;
+        }
+        [self scanPeripheralsAndConnectWithPeripheralName:peripheralName];
+    }else{
+        ELog(@"无历史连接设备");
+    }
+}
+
+- (void)scanPeripheralsAndConnectWithPeripheralName:(NSString *)name{
+    __weak MKBluetoothPrinter *weakSelf = self;
+    [self scanForPeripheralsWithBlock:^(BOOL success, NSString *message) {
+        if (success && weakSelf.peripheralsArray.count > 0) {
+            [self connectPeripheralWith:name block:^(BOOL success, NSString *message) {
+                
+            }];
+        }
+    }];
+}
+
 /** 扫描设备 */
 - (void)scanForPeripheralsWithBlock:(CommandBlcok)block{
     __weak MKBluetoothPrinter *weakSelf = self;
@@ -312,6 +309,7 @@
                               case HLOptionStageConnection:{
                                   if (error) {
                                       statusStr = @"error: connect fail";
+                                      weakSelf.connectPeripheral = nil;
                                       MKBlockExec(block, NO, statusStr);
                                   } else {
                                       statusStr = @"connect success";

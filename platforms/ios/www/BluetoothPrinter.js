@@ -3,22 +3,43 @@
 function BluetoothPrinter(){};
 
 /*
+ * 自动连接 历史连接过的设备
+ */
+BluetoothPrinter.prototype.autoConnectPeripheral = function(success, fail){
+    cordova.exec(success, fail, 'MKBluetoothPrinter', 'autoConnectPeripheral', []);
+}
+
+/** 
+ * 是否已连接设备 
+ * 返回： "1":是  "0":否
+ */
+BluetoothPrinter.prototype.isConnectPeripheral = function(success, fail){
+    cordova.exec(success, fail, 'MKBluetoothPrinter', 'isConnectPeripheral', []);
+}
+
+
+/*
  * 开始扫描设备
  * keep：是否持续回调 （0：否， 1：是，default:0）
  *
  * 返回的设备列表json数组
- * [{"id":"9A87E98E-BE88-5BA6-2C31-ED4869300E6E","name":"Printer_2EC1","uuid":"9A87E98E-BE88-5BA6-2C31-ED4869300E6E"}]
+ * [{"name":"Printer_2EC1","uuid":"9A87E98E-BE88-5BA6-2C31-ED4869300E6E"}]
  * 返回扫描到的外设列表信息(有可能为空)，在扫描的回调中返回，会有延时
  */
 BluetoothPrinter.prototype.scanForPeripherals = function(success, fail, keep){
     cordova.exec(success, fail, 'MKBluetoothPrinter', 'scanForPeripherals', [keep]);
 }
 
+/** 停止扫描 */
+BluetoothPrinter.prototype.stopScan = function(success, fail){
+    cordova.exec(success, fail, 'MKBluetoothPrinter', 'stopScan', [])
+}
+
 /**
  * 获取 外设列表
  * 调用后马上返回已经扫描到的外设列表。
  * 返回的设备列表json数组：
- * [{"id":"9A87E98E-BE88-5BA6-2C31-ED4869300E6E","name":"Printer_2EC1","uuid":"9A87E98E-BE88-5BA6-2C31-ED4869300E6E"}]
+ * [{"name":"Printer_2EC1","uuid":"9A87E98E-BE88-5BA6-2C31-ED4869300E6E"}]
  */
 BluetoothPrinter.prototype.getDeviceList = function(success, fail){
     cordova.exec(success,fail, 'MKBluetoothPrinter', 'getPeripherals',[]);
@@ -34,16 +55,11 @@ BluetoothPrinter.prototype.connectPeripheral = function(success, fail, uuid){
 }
 
 /**
- * 设置打印信息
+ * 设置打印信息 并打印
  * 参数jsonString， json数组字符串
  */
-BluetoothPrinter.prototype.setPrinterInfo = function(success, fail, jsonString){
-    cordova.exec(success, fail, 'MKBluetoothPrinter', 'createPrinterInfo', [jsonString]);
-}
-
-//确认打印
-BluetoothPrinter.prototype.finalPrinter = function(success, fail){
-    cordova.exec(success, fail, 'MKBluetoothPrinter', 'finalPrinter', []);
+BluetoothPrinter.prototype.setPrinterInfoAndPrinter = function(success, fail, jsonString){
+    cordova.exec(success, fail, 'MKBluetoothPrinter', 'printerWithPrinterInfo', [jsonString]);
 }
 
 //断开连接
