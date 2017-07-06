@@ -59,7 +59,7 @@ BluetoothPrinter.prototype.connectPeripheral = function(success, fail, uuid){
  * 参数jsonString， json数组字符串
  */
 BluetoothPrinter.prototype.setPrinterInfoAndPrinter = function(success, fail, jsonString){
-    cordova.exec(success, fail, 'MKBluetoothPrinter', 'printerWithPrinterInfo', [jsonString]);
+    cordova.exec(success, fail, 'MKBluetoothPrinter', 'setPrinterInfoAndPrinter', [jsonString]);
 }
 
 //断开连接

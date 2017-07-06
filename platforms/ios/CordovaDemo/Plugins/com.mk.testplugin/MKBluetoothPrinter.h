@@ -52,7 +52,7 @@ typedef void(^CommandBlcok)(BOOL success, NSString *message);
  * 设置打印信息 并打印
  * 参数： json 数组
  */
-- (void)printerWithPrinterInfo:(CDVInvokedUrlCommand *)command;
+- (void)setPrinterInfoAndPrinter:(CDVInvokedUrlCommand *)command;
 
 /** 断开外设连接 */
 - (void)stopPeripheralConnection:(CDVInvokedUrlCommand *)command;

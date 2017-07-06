@@ -105,7 +105,7 @@
 }
 
 /** set printer info and printer */
-- (void)printerWithPrinterInfo:(CDVInvokedUrlCommand *)command{
+- (void)setPrinterInfoAndPrinter:(CDVInvokedUrlCommand *)command{
     [self.commandDelegate runInBackground:^{
         if (command.arguments.count > 0 && command.arguments[0] != [NSNull null]) {
             NSString *jsonStr = command.arguments[0];
