@@ -319,7 +319,7 @@
                                   } else {
                                       statusStr = @"connect success";
                                       [weakSelf savePeripheralName:weakSelf.connectPeripheral.name];
-                                      MKBlockExec(block, YES, statusStr);
+                                      MKBlockExec(block, YES, weakSelf.connectPeripheral.identifier.UUIDString);
                                       return ;
                                   }
                                   break;
@@ -445,11 +445,13 @@
             case MKBTPrinterInfoType_footer:
                 [self.printerInfo appendFooter:model.text];
                 break;
+            case MKBTPrinterInfoType_cutpage:
+                [self.printerInfo appendCutPaper];
+                break;
             default:
                 break;
         }
     }
-    [self.printerInfo appendCutPaper];
 }
 
 - (void)appentTextListWith:(MKPrinterInfoModel *)model{
