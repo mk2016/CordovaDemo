@@ -319,7 +319,8 @@
                                   } else {
                                       statusStr = @"connect success";
                                       [weakSelf savePeripheralName:weakSelf.connectPeripheral.name];
-                                      MKBlockExec(block, YES, weakSelf.connectPeripheral.identifier.UUIDString);
+                                      NSString *str = [NSString stringWithFormat:@"{\"uuid\":%@,\"name\":%@}", weakSelf.connectPeripheral.name, weakSelf.connectPeripheral.identifier.UUIDString];
+                                      MKBlockExec(block, YES, str);
                                       return ;
                                   }
                                   break;
