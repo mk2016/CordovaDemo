@@ -202,3 +202,11 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 
 
 @end
+
+
+@interface MKPageWidthConfig : NSObject
+@property (nonatomic, copy) NSString *lineStr;
+@property (nonatomic, copy) NSArray *offsetAryfor3Text;
+@property (nonatomic, copy) NSArray *offsetAryfor4Text;
+- (void)setupConfigWith:(NSInteger)width;
+@end
