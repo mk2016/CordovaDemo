@@ -3,6 +3,20 @@
 function BluetoothPrinter(){};
 
 /*
+ * 设置打印机宽度
+ */
+ BluetoothPrinter.prototype.setPrinterPageWidth = function(success, fail, width){
+    cordova.exec(success, fail, 'MKBluetoothPrinter', 'setPrinterPageWidth',[width]);
+ }
+
+/*
+ * 获取当前设置的纸张宽度
+ */
+BluetoothPrinter.prototype.getCurrentSetPageWidth = function(success, fail){
+    cordova.exec(success, fail, 'MKBluetoothPrinter', 'getCurrentSetPageWidth');
+}
+
+/*
  * 自动连接 历史连接过的设备
  */
 BluetoothPrinter.prototype.autoConnectPeripheral = function(success, fail){

@@ -12,6 +12,9 @@
 #define kHLPadding 2
 #define kHLPreviewWidth 320
 
+#define KDefaultPageWidth 78
+static NSString * const kUD_pringerPageWidth = @"kUD_pringerPageWidth";
+
 @interface HLPrinter ()
 
 /** 将要打印的排版后的数据 */
@@ -29,6 +32,7 @@
     return self;
 }
 
+static NSInteger k_pageWidth = 0;
 - (void)defaultSetting{
     _printerData = [[NSMutableData alloc] init];
     
@@ -43,6 +47,25 @@
     Byte fontBytes[] = {0x1B,0x4D,0x00};
     [_printerData appendBytes:fontBytes length:sizeof(fontBytes)];
     
+    k_pageWidth = [[NSUserDefaults standardUserDefaults] integerForKey:kUD_pringerPageWidth];
+    if (k_pageWidth <= 0) {
+        k_pageWidth = KDefaultPageWidth;
+        [[NSUserDefaults standardUserDefaults] setInteger:k_pageWidth forKey:kUD_pringerPageWidth];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+#pragma mark - ***** 设置打印机纸张宽度 ******
+- (void)setPageWidth:(NSInteger)width{
+    if (width > 0) {
+        k_pageWidth = width;
+        [[NSUserDefaults standardUserDefaults] setInteger:k_pageWidth forKey:kUD_pringerPageWidth];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+     }
+}
+
+- (NSInteger)getPageWidth{
+    return k_pageWidth;
 }
 
 #pragma mark - -------------基本操作----------------
