@@ -247,6 +247,7 @@ PrinterInfoHelper.prototype.appendFooter = function(text){
 // 获取打印信息的 json 字符串
 PrinterInfoHelper.prototype.getPrinterInfoJsonString = function(){
     var jsonStr = JSON.stringify(_printerInfos);
+    _printerInfos = [];
     return jsonStr;
 }
 

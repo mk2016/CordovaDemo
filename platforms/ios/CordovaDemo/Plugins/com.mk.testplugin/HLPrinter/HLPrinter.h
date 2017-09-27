@@ -208,5 +208,6 @@ typedef NS_ENUM(NSInteger, HLFontSize) {
 @property (nonatomic, copy) NSString *lineStr;
 @property (nonatomic, copy) NSArray *offsetAryfor3Text;
 @property (nonatomic, copy) NSArray *offsetAryfor4Text;
+@property (nonatomic, assign) int virtualWidth;
 - (void)setupConfigWith:(NSInteger)width;
 @end

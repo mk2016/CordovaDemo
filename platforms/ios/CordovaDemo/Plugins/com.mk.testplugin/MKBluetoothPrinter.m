@@ -477,6 +477,10 @@
                 break;
         }
     }
+    if ([self.printerInfo getPageWidth] == 58) {
+        [self.printerInfo appendNewLine];
+        [self.printerInfo appendNewLine];
+    }
 }
 
 - (void)appentTextListWith:(MKPrinterInfoModel *)model{
@@ -520,7 +524,6 @@
         [self.manager writeValue:mainData forCharacteristic:self.chatacter type:CBCharacteristicWriteWithResponse completionBlock:^(CBCharacteristic *characteristic, NSError *error) {
             if (!error) {
                 MKBlockExec(block, YES, @"printer sucess");
-                ELog(@"printer sucess");
             }else{
                 MKBlockExec(block, NO, @"printer fail");
             }

@@ -280,7 +280,7 @@ static NSInteger k_pageWidth = 0;
 }
 
 - (NSString *)getPrintString:(NSString *)leader tail:(NSString *)tail{
-    static int TOTAL = 46;//这里是根据你的纸张宽度试验出来的一个合适的总字数
+    int TOTAL = self.config.virtualWidth; //这里是根据你的纸张宽度试验出来的一个合适的总字数
     NSMutableString *printString = [NSMutableString new];
     [printString appendString:leader];
     
@@ -502,6 +502,7 @@ static NSInteger k_pageWidth = 0;
     }
     [self appendSeperatorLine];
     [self appendText:footerInfo alignment:HLTextAlignmentCenter];
+    [self appendNewLine];
 }
 
 /** get final data */
@@ -520,10 +521,12 @@ static NSInteger k_pageWidth = 0;
         self.lineStr = @"- - - - - - - - - - - - - - - -";
         self.offsetAryfor3Text = [NSArray arrayWithObjects:@(150), @(300), nil];
         self.offsetAryfor4Text = [NSArray arrayWithObjects:@(140), @(220), @(300), nil];
+        self.virtualWidth = 30;
     }else{
         self.lineStr = @"- - - - - - - - - - - - - - - - - - - - - - - -";
         self.offsetAryfor3Text = [NSArray arrayWithObjects:@(240), @(480), nil];
         self.offsetAryfor4Text = [NSArray arrayWithObjects:@(210), @(350), @(480), nil];
+        self.virtualWidth = 46;
     }
 }
 
