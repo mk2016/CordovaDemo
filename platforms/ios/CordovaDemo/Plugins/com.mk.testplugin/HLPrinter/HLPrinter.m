@@ -375,7 +375,7 @@ static NSInteger k_pageWidth = 0;
         }
         
         if ([texts[0] length] > 0) {
-            [self setText:texts[0] maxChar:10];
+            [self setText:texts[0] maxChar:20];
         }
         
         if ([texts[1] length] > 0) {
@@ -403,7 +403,7 @@ static NSInteger k_pageWidth = 0;
     [self setAlignment:alignment];
     
     // 2.设置图片
-    UIImage *newImage = [image imageWithscaleMaxWidth:maxWidth];
+    UIImage *newImage = [image imageWithscaleMaxWidth:250];
 //    newImage = [newImage blackAndWhiteImage];
     
     NSData *imageData = [newImage bitmapData];
@@ -525,7 +525,7 @@ static NSInteger k_pageWidth = 0;
     }else{
         self.lineStr = @"- - - - - - - - - - - - - - - - - - - - - - - -";
         self.offsetAryfor3Text = [NSArray arrayWithObjects:@(240), @(480), nil];
-        self.offsetAryfor4Text = [NSArray arrayWithObjects:@(210), @(350), @(480), nil];
+        self.offsetAryfor4Text = [NSArray arrayWithObjects:@(280), @(380), @(470), nil];
         self.virtualWidth = 46;
     }
 }
