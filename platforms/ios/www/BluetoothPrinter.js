@@ -9,6 +9,9 @@ function BluetoothPrinter(){};
     cordova.exec(success, fail, 'MKBluetoothPrinter', 'setPrinterPageWidth',[width]);
  }
 
+ BluetoothPrinter.prototype.setFirstRankMaxLength = function(success, fail, first, second){
+     cordova.exec(success, fail, 'MKBluetoothPrinter', 'setFirstRankMaxLength', [first,second])
+ }
 /*
  * 获取当前设置的纸张宽度
  */
